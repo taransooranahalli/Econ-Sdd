@@ -40,3 +40,7 @@ Use existing Studio surfaces/typography/currency behavior for /account and /plan
 ## Investment growth page
 
 Use the same Studio sidebar, assumptions form, result panel, local fonts and USD/currency selector on /investments. Explain gross total return, nominal monthly portfolio fees and inflation beside inputs. Distinguish nominal gain, deducted fees, fee impact and start-period purchasing power. The chart compares after-fee balance, zero-fee balance and nominal contributions; the schedule exposes monthly gains, fees and cash flows. Keep phone navigation, keyboard tabs, explicit samples, stale/export/account-save guards and versioned file controls. [Investment contract](investment-spec.md).
+
+## Workflow order and timing consistency
+
+User requested 2026-10-28: navigation order is Savings, Cash flow, Investments, Saved plans on all pages. Investment deposit timing uses the same Month end / Month start segmented buttons and pressed-state semantics as Savings, with month end initially selected. Clicks mark prior results stale; examples, imports, saved-plan reopening and clearing synchronize the selected button with the existing beginning/end input contract. Financial conventions and saved-file formats are unchanged.

@@ -67,7 +67,7 @@ Implementation tests verify exact Fraction cash-flow and fee sums independently 
 
 ## Studio UI and user journey
 
-Add Investments to the existing desktop sidebar and phone navigation, linking to /investments. Retain dark surfaces, local Poppins, purple accents, spacing, focus styling and the USD selector. Reuse the assumptions-form/result-panel layout without introducing a new design system.
+Place Investments before Saved plans in the desktop sidebar and phone navigation, linking to /investments. Deposit timing uses the same Month end / Month start segmented buttons as Savings (month end default); examples, imports, saved-plan loading and clearing keep the visible selection synchronized. Retain dark surfaces, local Poppins, purple accents, spacing, focus styling and the USD selector. Reuse the assumptions-form/result-panel layout without introducing a new design system.
 
 Form: initial investment, monthly contribution, gross annual effective total return, duration, timing, fee and inflation. Keep fee convention, dividend reinvestment and no-FX explanations beside the relevant controls. Result: nominal ending balance and signed net gain, total contributions, fees deducted, fee impact and start-period purchasing power. A monthly chart compares after-fee balance, the zero-fee counterfactual and nominal contributions; no probability bands. The schedule exposes monthly gains, fee, contribution and closing balance, including month zero. Distinguish nominal chart values from the separate purchasing-power summary.
 
