@@ -21,4 +21,4 @@ The specifications define intended behavior; code implements it; tests check it.
 
 ## What the history means
 
-The first public Git commit is a reviewed snapshot of work developed locally with its specifications. The milestone record in plan.md describes that work; it is not a fabricated sequence of earlier Git commits. Future changes can use branches, issue acceptance criteria and pull requests to make the specification-to-test progression visible.
+After GitHub’s README initialization, the first application commit is a reviewed snapshot of work developed locally with its specifications. The milestone record in plan.md describes that work; it is not a fabricated sequence of earlier Git commits. Future changes can use branches, issue acceptance criteria and pull requests to make the specification-to-test progression visible.

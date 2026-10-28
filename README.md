@@ -16,7 +16,7 @@ The GitHub Pages site is a static portfolio with synthetic previews and precompu
 | --- | --- |
 | Savings, target-date goals, monthly cash flow | Implemented |
 | Sign-in and encrypted saved plans | Implemented and verified locally |
-| Public portfolio | GitHub Pages publication workflow |
+| Public portfolio | Live GitHub Pages showcase |
 | Investment and portfolio research | Planned |
 | Prediction-market analysis | Planned |
 | Forecasting / ML and C/C++ acceleration | Separate future research; not implemented |
@@ -29,7 +29,7 @@ The GitHub Pages site is a static portfolio with synthetic previews and precompu
 4. Test the API, serialization, security and UI separately; state which checks actually ran.
 5. Review the milestone and update [the evidence record](docs/plan.md). Use the issue/PR templates for subsequent work.
 
-The first public commit is a reviewed snapshot of work developed locally. Earlier local milestones are documented; Git history is not backdated to imitate their development.
+The initial application commit is a reviewed snapshot of work developed locally, following GitHub’s README initialization. Earlier local milestones are documented; Git history is not backdated to imitate their development.
 
 ## Run locally
 

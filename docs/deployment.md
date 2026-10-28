@@ -1,6 +1,10 @@
 # Publication and hosting
 
-## Current choice: GitHub Pages showcase
+## Live GitHub Pages showcase
+
+Repository: https://github.com/taransooranahalli/Econ-Sdd
+
+Site: https://taransooranahalli.github.io/Econ-Sdd/
 
 GitHub Pages serves the static portfolio from `site/`, built into `dist/showcase/`. It does not run FastAPI, Python calculations, sign-in or SQLite. Screenshots and walkthrough figures are explicitly synthetic precomputed examples. The full application runs locally using README instructions.
 

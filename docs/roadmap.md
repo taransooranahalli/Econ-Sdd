@@ -8,7 +8,7 @@ The project is deliberately incomplete. The current release establishes calculat
 | Savings goal | Implemented | Sensitivity/scenario comparison with explicit calendar conventions |
 | Monthly cash flow | Implemented | Dated running-balance planning if requested |
 | Local accounts and encrypted saved plans | Implemented locally | Hosting threat model, operational backups and account lifecycle |
-| GitHub Pages showcase | Current publication milestone | Verified CI/deployment and readable SDD evidence |
+| GitHub Pages showcase | Published | Continue refining the CI-backed SDD evidence and product previews |
 | Live Python backend | Planned | Host/budget, persistent SQL storage, TLS/proxy, secrets, backups, capacity and abuse controls |
 | Investment and portfolio research | Planned | Instruments, valuation/return definitions, dividends/corporate actions, allocation, benchmark and cost assumptions, data licensing/freshness |
 | Prediction-market analysis | Planned | Event/outcome definitions, market-implied probabilities, fees/spreads/liquidity, resolution rules, timestamps and data provenance; analysis before execution |

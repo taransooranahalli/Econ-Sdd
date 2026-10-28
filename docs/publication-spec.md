@@ -1,12 +1,12 @@
 # Repository and GitHub Pages publication
 
-Status: requested 2026-10-28. The user selected GitHub Pages showcase first; full backend hosting is deferred. Publishing the reviewed repository/showcase is authorized. No paid service or backend account deployment is authorized by this selection.
+Status: published 2026-10-28. The user selected GitHub Pages showcase first; full backend hosting is deferred. Publishing the reviewed repository/showcase is authorized. No paid service or backend account deployment is authorized by this selection.
 
 ## Purpose and boundary
 
 Publish Econ-Sdd as a public personal GitHub repository demonstrating specification-driven development. Its GitHub Pages project site presents synthetic calculator screenshots, documented worked examples, implementation status, and links to specifications, algorithms and tests. It is a portfolio showcase, not the running FastAPI service. No live sign-in or personal financial data entry on Pages, and no claim that accounts persist there.
 
-The existing Python/SQLite application remains runnable locally. Its real database, keyring, sessions, downloaded records, virtual environment, editor caches and machine-specific files must never enter the Git index or Pages artifacts. A fresh repository begins with the current reviewed snapshot; do not fabricate earlier commits or pretend Git records the previous local milestones.
+The existing Python/SQLite application remains runnable locally. Its real database, keyring, sessions, downloaded records, virtual environment, editor caches and machine-specific files must never enter the Git index or Pages artifacts. The application is published as a reviewed snapshot after GitHub’s README initialization; do not fabricate earlier commits or pretend Git records the previous local milestones.
 
 ## PUB-AC-01..06
 
