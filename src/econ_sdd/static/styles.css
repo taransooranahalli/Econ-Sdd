@@ -316,3 +316,14 @@ html,body{margin:0;background:#080808;color:#fff;color-scheme:dark}body{min-widt
 #econ-savings-usd .ec-auth-panel .ec-field{margin-bottom:20px}
 #econ-savings-usd .ec-calculator-nav a{font-size:11px}
 }
+
+/* Investment growth reuses the accepted Studio layout and currency surfaces. */
+#econ-savings-usd .ec-investment-context{margin:0 0 20px;line-height:1.7}
+#econ-savings-usd .ec-no-fee{background:#9ac7ac}
+#econ-savings-usd .ec-investment-layout select{max-width:100%;width:100%;background:transparent;color:var(--ec-ink);border:0;padding:10px 0;font:inherit}
+#econ-savings-usd .ec-investment-layout option{background:var(--ec-panel);color:var(--ec-ink)}
+#econ-savings-usd .ec-investment-layout .ec-helper{line-height:1.65}
+#econ-savings-usd .ec-investment-layout .ec-form .ec-helper{margin-top:6px;display:block}
+#econ-savings-usd .ec-investment-layout .ec-legend{flex-wrap:wrap;gap:12px}
+#econ-savings-usd .ec-investment-layout .ec-primary{white-space:normal}
+@media(max-width:680px){#econ-savings-usd .ec-investment-layout .ec-form{display:block}#econ-savings-usd .ec-investment-layout .ec-field{display:block;margin-bottom:20px}#econ-savings-usd .ec-calculator-nav{flex-wrap:wrap}#econ-savings-usd .ec-calculator-nav a{flex:1 0 auto}}

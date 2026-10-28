@@ -4,7 +4,7 @@
 
 [Portfolio showcase](https://taransooranahalli.github.io/Econ-Sdd/) · [Requirements → code → tests](docs/traceability.md) · [Roadmap](docs/roadmap.md) · [Architecture](docs/architecture.md)
 
-A private local app for savings, goals, monthly cash flow, and encrypted saved plans with the approved Studio UI: dark surfaces, Poppins typography, and purple accents inspired by taran.work. Financial results are computed in Python with Decimal arithmetic; the browser renders the results.
+A private local app for savings, goals, monthly cash flow, investment growth and encrypted saved plans with the approved Studio UI: dark surfaces, Poppins typography, and purple accents inspired by taran.work. Financial results are computed in Python with Decimal arithmetic; the browser renders the results.
 
 ## What this project demonstrates
 
@@ -17,7 +17,8 @@ The GitHub Pages site is a static portfolio with synthetic previews and precompu
 | Savings, target-date goals, monthly cash flow | Implemented |
 | Sign-in and encrypted saved plans | Implemented and verified locally |
 | Public portfolio | Live GitHub Pages showcase |
-| Investment and portfolio research | Planned |
+| Investment growth with fees and inflation | Implemented locally |
+| Portfolio allocation and holdings analysis | Requested for later milestones |
 | Prediction-market analysis | Planned |
 | Forecasting / ML and C/C++ acceleration | Separate future research; not implemented |
 
@@ -68,6 +69,16 @@ Choose **Cash flow** from the sidebar or phone navigation, or open `/cash-flow`.
 A surplus is money left before savings allocations. A shortfall means expenses exceed income; the result is not an account balance and does not track cash between paydays. Undefined percentages (such as spending share when income is zero) show Not applicable. No future extrapolation or target spending ratio is inferred.
 
 **Load example** shows $4,500 income, $3,000 expenses and a $1,500 monthly surplus. **Save budget · JSON** and **Open budget** preserve and recompute cash flow inputs; **Export breakdown · CSV** includes each category, totals and conventions. CSV protects labels from spreadsheet-formula interpretation. Open savings/goal files in Savings, cash flow files in Cash flow. Unsaved inputs are lost on refresh or navigation.
+
+## Investment growth
+
+Open **Investments** from the sidebar or phone navigation. Enter an initial investment, fixed monthly contribution, gross annual effective total return, whole-month horizon, contribution timing, annual nominal portfolio fee and annual effective inflation. All financial fields are explicit, including zero fees/inflation. USD remains the default with the same currency selector and no FX conversion.
+
+Python projects the nominal balance, signed net gain, contributions, fees deducted, zero-fee ending value, fee impact and start-period purchasing power. The modeled fee is the annual nominal percentage divided into twelve monthly deductions on the post-return invested balance; it is not a reconstruction of a fund's daily expense ratio. Do not count fees already included in a supplied return again. Total return includes reinvested distributions; taxes are not modeled.
+
+The labeled synthetic example ($10,000 initially, $250 at each month end, 5% annual effective return, 0.5% annual nominal fee, 2% inflation, 120 months) gives **$53,067.70 nominal ending value**, **$1,495.46 deducted fees**, **$1,812.04 fee impact** and **$43,534.00 start-period purchasing power**. It is a conditional illustration, not a market forecast or recommendation. Negative returns and losses are supported. No prices or financial accounts are connected.
+
+Inspect the monthly chart/schedule, save/reimport JSON, export CSV or explicitly save the validated inputs to your encrypted local account. Reopening always recalculates. [INV-M01/M02 and acceptance criteria](docs/investment-spec.md) define the model. Allocation/rebalancing and holdings/historical returns are later, separately specified milestones.
 
 ## Accounts and saved plans
 

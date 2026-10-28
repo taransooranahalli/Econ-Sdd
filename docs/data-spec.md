@@ -62,3 +62,7 @@ JSON raw monetary values remain strings; UI display values and CSV derive from t
 ## Accounts and saved plans
 
 [Account specification](account-spec.md) owns credentials, sessions, owner-scoped encrypted original inputs, revisions, recovery codes, encryption coverage/limits, key management, persistence and schema migration. Earlier download-only persistence describes anonymous use; signed-in users may explicitly save to their account. JSON/CSV downloads remain unencrypted.
+
+## Investment records
+
+[Investment data contract](investment-spec.md#data-api-and-encrypted-plans) defines investment-growth-v1, the investment_growth kind, explicit decimal inputs and recomputed JSON/CSV/account saves. Canonical inputs use fixed-point strings (never exponent notation), including tiny supported rates. Compact JSON preserves all monthly rows within the 1 MiB import cap.

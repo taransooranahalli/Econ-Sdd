@@ -58,3 +58,7 @@ The user requested sign-in, a user database and encrypted reusable calculator in
 ## ADR-004: static public showcase, separate app hosting
 
 Keep the Python/SQLite app intact. Publish an allowlisted static portfolio under site/ through GitHub Pages, with no live account forms or private runtime files. A later Python host can deploy from the same repository after its own storage/HTTPS/keys review. See [publication specification](publication-spec.md).
+
+## Investment growth extension
+
+Add pure finance/investments.py and serialization/investments.py; reuse validated common savings conventions and its exact-root helper/zero-fee engine without changing savings behavior. web.py adds guarded investment endpoints; account_api.py dispatches the encrypted investment_growth payload without a SQL schema migration. investments.html/js render server values using the accepted Studio surfaces. No new dependency or provider. [Contract](investment-spec.md).

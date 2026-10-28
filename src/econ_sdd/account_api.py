@@ -14,7 +14,11 @@ from .finance.savings import MODEL_VERSION,SavingsScenario,calculate_savings
 from .serialization.cash_flow import cash_flow_record,cash_flow_display
 from .serialization.records import result_record,result_display
 
-VERSIONS={'savings':MODEL_VERSION,'goal':GOAL_MODEL_VERSION,'cash_flow':CASH_FLOW_MODEL_VERSION}
+from .finance.investments import MODEL_VERSION as INVESTMENT_MODEL_VERSION, InvestmentScenario, calculate_investments
+from .serialization.investments import investment_record, investment_display
+
+MODELS={'savings':SavingsScenario,'goal':SavingsGoal,'cash_flow':CashFlowBudget,'investment_growth':InvestmentScenario}
+VERSIONS={'investment_growth':INVESTMENT_MODEL_VERSION,'savings':MODEL_VERSION,'goal':GOAL_MODEL_VERSION,'cash_flow':CASH_FLOW_MODEL_VERSION}
 
 
 def fields(data,required):
@@ -27,13 +31,15 @@ def normalize_plan(data,*,updating=False):
     kind=data['kind']
     if not isinstance(kind,str) or kind not in VERSIONS:raise AccountError(422,'Choose a supported calculator.')
     if updating and (type(data['revision']) is not int or data['revision']<1):raise AccountError(422,'Use the current saved-plan revision.')
-    model={'savings':SavingsScenario,'goal':SavingsGoal,'cash_flow':CashFlowBudget}[kind].from_mapping(data['inputs'])
+    model=MODELS[kind].from_mapping(data['inputs'])
     # Validate arithmetic before persisting original inputs; no derived result is trusted or stored.
     calculate_model(kind,model)
     return {'title':data['title'].strip(),'kind':kind,'model_version':VERSIONS[kind],'inputs':model.as_record()}
 
 
 def calculate_model(kind,model):
+    if kind=='investment_growth':
+        result=calculate_investments(model);return {**investment_record(result),'display':investment_display(result)}
     if kind=='cash_flow':
         result=calculate_cash_flow(model);return {**cash_flow_record(result),'display':cash_flow_display(result)}
     result=solve_goal(model) if kind=='goal' else calculate_savings(model)
@@ -43,7 +49,7 @@ def calculate_model(kind,model):
 def reopened_calculation(value):
     kind=value['kind']
     if kind not in VERSIONS or value['model_version']!=VERSIONS[kind]:raise AccountError(422,'This saved model needs a reviewed migration before it can be opened.')
-    model={'savings':SavingsScenario,'goal':SavingsGoal,'cash_flow':CashFlowBudget}[kind].from_mapping(value['inputs'])
+    model=MODELS[kind].from_mapping(value['inputs'])
     return calculate_model(kind,model)
 
 

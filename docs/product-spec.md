@@ -65,3 +65,7 @@ The user requested sign-in and encrypted persistent user data for every calculat
 ## Public showcase and ongoing roadmap
 
 The user selected GitHub Pages showcase first on 2026-10-28. [Publication specification](publication-spec.md) defines repository/site requirements. Investments and prediction-market analysis are planned future sections; current calculators and local encrypted accounts are implemented. The Pages site does not provide the Python/account backend.
+
+## Investments specification work
+
+The user requested the investments section on 2026-10-28 using the same specification-first workflow and Studio UI. [Investment growth contract](investment-spec.md) defines the first bounded tool, explicit financial conventions and INV-AC-01..06. The user selected growth first, with portfolio allocation/rebalancing and holdings/historical returns later. Implemented locally in 0.5.0; verification and limitations are recorded in plan.md.

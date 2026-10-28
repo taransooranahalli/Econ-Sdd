@@ -67,3 +67,7 @@ For applicable milestones, require independent mathematical reference values, ed
 ## Account milestone
 
 The user authorized sign-in, a user database and encrypted persistent calculator data on 2026-10-27. docs/account-spec.md defines the scope and security contract. This supersedes the original single-user/download-only constraint for explicit account saves. Deployment remains separately authorized. Never use real user credentials or financial records for tests; keep keys out of source and test against temporary stores.
+
+## Investment milestone
+
+The user selected investment growth first on 2026-10-28 after reviewing docs/investment-spec.md. Implement INV-AC-01..06 with the Studio standard and existing encrypted saved-plan library. Portfolio allocation/rebalancing and holdings/historical-return analysis are explicitly requested for later reviewed milestones; do not expand this release into market data or forecasting.

@@ -129,3 +129,7 @@ Currency metadata reference: [SIX ISO 4217 maintenance agency and List One](http
 ## Cash flow model
 
 [CF-M01](cash-flow-spec.md#cf-m01-monthly-budget) defines monthly income-minus-expenses, exact currency sums and undefined ratios. It is independent of savings interest calculations.
+
+## Investment growth
+
+[INV-M01/M02](investment-spec.md) own the investment total-return, monthly fee, zero-fee counterfactual and purchasing-power formulas, bounds, rounding and independent references. Existing savings/goal math remains unchanged.

@@ -6,7 +6,10 @@ from .finance.savings import PRECISION
 
 
 def rounded_amount(value: Decimal, currency: str) -> Decimal:
-    with localcontext(Context(prec=PRECISION, rounding=ROUND_HALF_EVEN)):
+    # Deflated long-horizon values can exceed 80 integer digits; quantization
+    # needs room for those digits without changing calculation precision.
+    digits = CURRENCIES[currency].minor_digits
+    with localcontext(Context(prec=max(PRECISION, value.adjusted() + digits + 2), rounding=ROUND_HALF_EVEN)):
         rounded = value.quantize(Decimal(1).scaleb(-CURRENCIES[currency].minor_digits))
         return rounded.copy_abs() if rounded == 0 else rounded
 

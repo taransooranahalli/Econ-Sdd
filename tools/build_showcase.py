@@ -8,7 +8,7 @@ import shutil
 import xml.etree.ElementTree as ET
 
 ROOT=Path(__file__).resolve().parents[1]
-PUBLIC_FILES=frozenset({'index.html','assets/styles.css','assets/showcase.js','assets/icon.svg','assets/goal.png','assets/cash-flow.png',
+PUBLIC_FILES=frozenset({'index.html','assets/styles.css','assets/showcase.js','assets/icon.svg','assets/goal.png','assets/cash-flow.png','assets/investments.png',
                         'assets/fonts/Poppins-400.ttf','assets/fonts/Poppins-600.ttf','assets/fonts/Poppins-700.ttf','assets/fonts/OFL.txt'})
 REPOSITORY=re.compile(r'[A-Za-z0-9](?:[A-Za-z0-9-]{0,37}[A-Za-z0-9])?/[A-Za-z0-9_.-]{1,100}\Z')
 

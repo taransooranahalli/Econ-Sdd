@@ -35,6 +35,7 @@ jobs:
           python -m pip check
           node --check src/econ_sdd/static/app.js
           node --check src/econ_sdd/static/cash-flow.js
+          node --check src/econ_sdd/static/investments.js
           node --check src/econ_sdd/static/account.js
           node --check site/assets/showcase.js
       - name: Build the public asset allowlist

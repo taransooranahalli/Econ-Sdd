@@ -23,6 +23,10 @@ from .serialization.records import (MAX_FILE_BYTES, calculation_from_record, cal
 from .serialization.cash_flow import (budget_from_record, cash_flow_record, cash_flow_display,
                                       export_cash_flow_json, export_cash_flow_csv)
 
+from .finance.investments import MODEL_VERSION as INVESTMENT_MODEL_VERSION, InvestmentScenario, calculate_investments
+from .serialization.investments import (scenario_from_record, investment_record, investment_display,
+                                        export_investment_json, export_investment_csv)
+
 STATIC = Path(__file__).parent / "static"
 
 
@@ -98,10 +102,14 @@ def create_app(*,account_store: AccountStore|None=None,public_origin: str|None=N
     def cash_flow_page():
         return HTMLResponse((STATIC / "cash-flow.html").read_text().replace("__CSRF_TOKEN__", csrf_token))
 
+    @app.get("/investments", response_class=HTMLResponse)
+    def investments_page():
+        return HTMLResponse((STATIC / "investments.html").read_text().replace("__CSRF_TOKEN__", csrf_token))
+
     @app.get("/api/config")
     def config():
         return {"default_currency": DEFAULT_CURRENCY, "app_version": __version__, "model_version": MODEL_VERSION,
-                "goal_model_version": GOAL_MODEL_VERSION, "cash_flow_model_version": CASH_FLOW_MODEL_VERSION,
+                "investment_model_version": INVESTMENT_MODEL_VERSION, "goal_model_version": GOAL_MODEL_VERSION, "cash_flow_model_version": CASH_FLOW_MODEL_VERSION,
                 "max_months": MAX_MONTHS, "max_upload_bytes": MAX_FILE_BYTES,
                 "currencies": [{"code": c.code, "name": c.name, "symbol": c.symbol, "minor_digits": c.minor_digits}
                                for c in CURRENCIES.values()]}
@@ -158,6 +166,34 @@ def create_app(*,account_store: AccountStore|None=None,public_origin: str|None=N
         body = export_cash_flow_json(result) if kind == "json" else export_cash_flow_csv(result)
         return Response(body, media_type="application/json" if kind == "json" else "text/csv",
                         headers={"Content-Disposition": f'attachment; filename="econ-cash-flow-{result.budget.currency}.{kind}"'})
+
+    @app.post("/api/investments")
+    async def investments(request: Request):
+        data, error = await payload(request)
+        if error is not None:
+            return error
+        result = calculate_investments(InvestmentScenario.from_mapping(data))
+        return {**investment_record(result), "display": investment_display(result)}
+
+    @app.post("/api/investments/import")
+    async def investments_import(request: Request):
+        data, error = await payload(request)
+        if error is not None:
+            return error
+        result = calculate_investments(scenario_from_record(data))
+        return {**investment_record(result), "display": investment_display(result)}
+
+    @app.post("/api/investments/export/{kind}")
+    async def investments_export(request: Request, kind: str):
+        if kind not in ("json", "csv"):
+            return JSONResponse({"errors": {"file": "Choose JSON or CSV export."}}, status_code=404)
+        data, error = await payload(request)
+        if error is not None:
+            return error
+        result = calculate_investments(InvestmentScenario.from_mapping(data))
+        body = export_investment_json(result) if kind == "json" else export_investment_csv(result)
+        return Response(body, media_type="application/json" if kind == "json" else "text/csv",
+                        headers={"Content-Disposition": f'attachment; filename="econ-investments-{result.scenario.currency}.{kind}"'})
 
     @app.post("/api/export/{kind}")
     async def export(request: Request, kind: str):

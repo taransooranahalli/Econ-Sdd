@@ -8,6 +8,7 @@ Econ-Sdd/
 │   ├── finance/
 │   │   ├── savings.py          Decimal savings projection
 │   │   ├── goals.py            Required deposit and calendar rules
+│   │   ├── investments.py      Total return, monthly fees and purchasing power
 │   │   ├── cash_flow.py        Monthly income minus expenses
 │   │   └── currencies.py       Supported currencies and minor units
 │   ├── serialization/         Versioned JSON/CSV and server display values

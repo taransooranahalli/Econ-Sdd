@@ -35,6 +35,7 @@ def register(client,username='Alice_QA'):
 
 def payload(kind='savings'):
     inputs={
+        'investment_growth':{'initial_balance':'1000','monthly_contribution':'100','annual_return_percent':'5','annual_fee_percent':'0','annual_inflation_percent':'2','duration_months':12},
         'savings':{'initial_balance':'1000','monthly_contribution':'100','annual_effective_rate_percent':'5','duration_months':12,'currency':'USD'},
         'goal':{'initial_balance':'1000','goal_amount':'5000','annual_effective_rate_percent':'5','start_date':'2026-10-28','target_date':'2028-10-28','currency':'USD'},
         'cash_flow':{'income':[{'label':'Synthetic pay','amount':'4500'}],'expenses':[{'label':'Synthetic costs','amount':'3000'}],'currency':'USD'},
@@ -59,7 +60,7 @@ def test_registration_cookie_login_rotation_logout_and_hash_only_database(servic
     assert PASSWORD.encode() not in store.path.read_bytes()
 
 
-@pytest.mark.parametrize('kind,expected',[('savings','$2,277.26'),('goal','$154.92'),('cash_flow','$1,500.00')])
+@pytest.mark.parametrize('kind,expected',[('savings','$2,277.26'),('goal','$154.92'),('cash_flow','$1,500.00'),('investment_growth','$2,277.26')])
 def test_each_calculator_saves_inputs_reopens_recomputes_and_survives_app_restart(service,kind,expected):
     store,_,app=service;client=client_for(app);register(client)
     response=client.post('/api/plans',json=payload(kind));assert response.status_code==200
@@ -76,22 +77,24 @@ def test_each_calculator_saves_inputs_reopens_recomputes_and_survives_app_restar
     assert restarted.get('/api/plans').json()['plans'][0]['title']==payload(kind)['title']
 
 
-def test_two_users_cannot_read_update_delete_or_list_each_others_data(service):
+@pytest.mark.parametrize('kind',['savings','investment_growth'])
+def test_two_users_cannot_read_update_delete_or_list_each_others_data(service,kind):
     _,_,app=service;a=client_for(app);b=client_for(app);register(a);register(b,'Bob_QA')
-    saved=a.post('/api/plans',json=payload()).json()['plan'];url='/api/plans/'+saved['id']
+    saved=a.post('/api/plans',json=payload(kind)).json()['plan'];url='/api/plans/'+saved['id']
     assert b.get('/api/plans').json()=={'plans':[]}
     expected={'errors':{'form':'Saved plan not found.'}}
     for response in [b.get(url),b.get('/api/plans/'+str(uuid4())),
-                     b.post(url+'/replace',json={**payload(),'revision':1}),b.post(url+'/delete',json={'revision':1})]:
+                     b.post(url+'/replace',json={**payload(kind),'revision':1}),b.post(url+'/delete',json={'revision':1})]:
         assert response.status_code==404 and response.json()==expected
     assert a.get(url).status_code==200
 
 
-def test_revisions_prevent_lost_updates_and_wrong_deletes(service):
-    _,_,app=service;c=client_for(app);register(c);saved=c.post('/api/plans',json=payload()).json()['plan'];url='/api/plans/'+saved['id']
-    response=c.post(url+'/replace',json={**payload(),'title':'Renamed plan','revision':1})
+@pytest.mark.parametrize('kind',['savings','investment_growth'])
+def test_revisions_prevent_lost_updates_and_wrong_deletes(service,kind):
+    _,_,app=service;c=client_for(app);register(c);saved=c.post('/api/plans',json=payload(kind)).json()['plan'];url='/api/plans/'+saved['id']
+    response=c.post(url+'/replace',json={**payload(kind),'title':'Renamed plan','revision':1})
     assert response.status_code==200 and response.json()['plan']['revision']==2
-    assert c.post(url+'/replace',json={**payload(),'revision':1}).status_code==409
+    assert c.post(url+'/replace',json={**payload(kind),'revision':1}).status_code==409
     assert c.post(url+'/delete',json={'revision':True}).status_code==409
     assert c.post(url+'/delete',json={'revision':2}).status_code==200
     assert c.get(url).status_code==404

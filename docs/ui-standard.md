@@ -36,3 +36,7 @@ Preserve Studio sidebar, dark surfaces, purple accents, local Poppins, currency 
 ## Accounts and saved plans
 
 Use existing Studio surfaces/typography/currency behavior for /account and /plans. Explain encryption coverage and explicit saves. Provide accessible sign-in/create/recover/password forms, one-time recovery-code display, signed-in state, named account saves, a private plan library and stale/revision-conflict feedback. Calculator math remains unchanged.
+
+## Investment growth page
+
+Use the same Studio sidebar, assumptions form, result panel, local fonts and USD/currency selector on /investments. Explain gross total return, nominal monthly portfolio fees and inflation beside inputs. Distinguish nominal gain, deducted fees, fee impact and start-period purchasing power. The chart compares after-fee balance, zero-fee balance and nominal contributions; the schedule exposes monthly gains, fees and cash flows. Keep phone navigation, keyboard tabs, explicit samples, stale/export/account-save guards and versioned file controls. [Investment contract](investment-spec.md).
