@@ -1,0 +1,318 @@
+html,body{margin:0;background:#080808;color:#fff;color-scheme:dark}body{min-width:320px}
+@font-face{font-family:Poppins;font-style:normal;font-weight:400;font-display:swap;src:url("/static/fonts/Poppins-400.ttf") format("truetype")}
+@font-face{font-family:Poppins;font-style:normal;font-weight:600;font-display:swap;src:url("/static/fonts/Poppins-600.ttf") format("truetype")}
+@font-face{font-family:Poppins;font-style:normal;font-weight:700;font-display:swap;src:url("/static/fonts/Poppins-700.ttf") format("truetype")}
+
+#econ-savings-usd{--ec-bg:light-dark(#f4f5f0,#171d19);--ec-panel:light-dark(#fffefb,#202923);--ec-ink:light-dark(#233e31,#e8eee9);--ec-muted:light-dark(#657568,#a8b8ac);--ec-line:light-dark(#e1e6dc,#39463d);--ec-accent:light-dark(#216648,#92d4ac);--ec-on-accent:light-dark(#ffffff,#142e20);--ec-soft:light-dark(#e8eee5,#303e32);--ec-side:light-dark(#ecefe7,#1c251f);--ec-deposit:light-dark(#879a7e,#91a58a);--ec-danger:light-dark(#ae3629,#ffaea2);font-family:"Poppins","Avenir Next",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ec-ink);color-scheme:dark;width:100%;}
+#econ-savings-usd *{box-sizing:border-box}
+#econ-savings-usd .ec-stage{min-height:1010px;background:var(--ec-bg);border-radius:14px;overflow:hidden}
+#econ-savings-usd .ec-shell{display:grid;grid-template-columns:158px minmax(0,1fr);min-height:1010px;background:var(--ec-bg)}
+#econ-savings-usd button,#econ-savings-usd input,#econ-savings-usd select{font:inherit}
+#econ-savings-usd button{color:inherit;transition:background .15s,transform .15s}
+#econ-savings-usd button:disabled{opacity:.52}
+#econ-savings-usd button:focus-visible,#econ-savings-usd input:focus-visible,#econ-savings-usd select:focus-visible{outline:3px solid var(--ec-accent);outline-offset:3px}
+#econ-savings-usd .ec-sidebar{background:var(--ec-side);padding:30px 16px;display:flex;flex-direction:column;border-right:1px solid var(--ec-line)}
+#econ-savings-usd .ec-brand{font-family:Georgia,serif;font-size:30px;letter-spacing:-1.3px;display:flex;align-items:center;gap:8px;font-weight:500}
+#econ-savings-usd .ec-brand-symbol{width:27px;height:27px;border-radius:9px;background:var(--ec-accent);color:var(--ec-on-accent);display:grid;place-items:center;flex-shrink:0}
+#econ-savings-usd [data-lucide]{width:16px;height:16px;display:inline-block}
+#econ-savings-usd .ec-brand-note{font-size:11px;color:var(--ec-muted);margin:7px 0 44px 2px}
+#econ-savings-usd .ec-nav-caption{font-size:9px;font-weight:600;letter-spacing:1.1px;color:var(--ec-muted);margin:0 10px 12px;text-transform:uppercase}
+#econ-savings-usd .ec-nav-item{display:flex;gap:8px;align-items:center;padding:11px 10px;border-radius:7px;font-size:12px;margin-bottom:4px;background:transparent;border:0;width:100%;text-align:left;text-decoration:none}
+#econ-savings-usd .ec-nav-item.ec-active{background:var(--ec-panel);color:var(--ec-accent);font-weight:600;box-shadow:0 1px 2px light-dark(#17271a08,#00000010)}
+#econ-savings-usd .ec-nav-item small{font-size:9px;color:var(--ec-muted);margin-left:auto}
+#econ-savings-usd .ec-nav-footer{margin-top:auto;padding:30px 10px 0;color:var(--ec-muted);font-size:11px;line-height:1.7}
+#econ-savings-usd .ec-topbar{height:63px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--ec-line);gap:15px;padding:0 28px;font-size:11px;color:var(--ec-muted)}
+#econ-savings-usd .ec-breadcrumb{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+#econ-savings-usd .ec-breadcrumb strong{font-weight:500;color:var(--ec-ink)}
+#econ-savings-usd .ec-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 9px;border-radius:30px;background:var(--ec-soft);color:var(--ec-accent);font-size:10px;white-space:nowrap;font-weight:500}
+#econ-savings-usd .ec-dot{width:5px;height:5px;background:currentColor;border-radius:50%;display:inline-block}
+#econ-savings-usd .ec-main{min-width:0;padding:30px 28px 22px}
+#econ-savings-usd .ec-header{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin:0 0 25px}
+#econ-savings-usd .ec-eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--ec-accent);font-weight:600;margin:0 0 10px}
+#econ-savings-usd h1{font-family:Georgia,"Times New Roman",serif;font-size:37px;line-height:1.14;font-weight:400;letter-spacing:-1px;margin:0 0 10px}
+#econ-savings-usd .ec-subtitle{font-size:12px;line-height:1.7;color:var(--ec-muted);margin:0;max-width:430px}
+#econ-savings-usd .ec-quiet-button{background:var(--ec-panel);border:1px solid var(--ec-line);padding:9px 12px;border-radius:7px;font-size:11px;display:inline-flex;gap:7px;align-items:center;white-space:nowrap}
+#econ-savings-usd .ec-layout{display:grid;grid-template-columns:236px minmax(0,1fr);gap:18px;align-items:start}
+#econ-savings-usd .ec-surface{background:var(--ec-panel);border:1px solid var(--ec-line);border-radius:var(--ec-radius,10px);min-width:0}
+#econ-savings-usd .ec-form{padding:21px 19px}
+#econ-savings-usd .ec-section-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 22px}
+#econ-savings-usd h2{font-size:13px;font-weight:600;letter-spacing:-.15px;margin:0;line-height:1.4}
+#econ-savings-usd .ec-small-tag{font-size:9px;padding:4px 6px;background:var(--ec-bg);border-radius:4px;color:var(--ec-muted)}
+#econ-savings-usd .ec-field{display:block;margin-bottom:19px;min-width:0}
+#econ-savings-usd .ec-label{display:flex;justify-content:space-between;font-size:11px;font-weight:500;gap:8px;margin-bottom:8px}
+#econ-savings-usd .ec-label-detail{color:var(--ec-muted);font-weight:400}
+#econ-savings-usd .ec-input-wrap{border:1px solid var(--ec-line);border-radius:6px;background:var(--ec-panel);display:flex;align-items:center;gap:8px;padding:0 10px;min-height:40px}
+#econ-savings-usd .ec-input-wrap:focus-within{border-color:var(--ec-accent)}
+#econ-savings-usd .ec-input-wrap input{width:100%;min-width:0;border:0;background:transparent;color:var(--ec-ink);padding:10px 0;font-size:14px;font-variant-numeric:tabular-nums;outline-offset:1px}
+#econ-savings-usd .ec-unit{color:var(--ec-muted);font-size:10px;flex-shrink:0}
+#econ-savings-usd .ec-helper{font-size:10px;color:var(--ec-muted);line-height:1.6;margin:7px 0 0}
+#econ-savings-usd .ec-slider{width:100%;accent-color:var(--ec-accent);margin:8px 0 5px}
+#econ-savings-usd .ec-range-labels{display:flex;justify-content:space-between;font-size:9px;color:var(--ec-muted)}
+#econ-savings-usd .ec-segment{display:flex;background:var(--ec-bg);border:1px solid var(--ec-line);border-radius:7px;padding:3px;gap:3px}
+#econ-savings-usd .ec-segment button{border:0;flex:1;min-height:32px;border-radius:4px;padding:6px;background:transparent;font-size:10px;color:var(--ec-muted);white-space:nowrap}
+#econ-savings-usd .ec-segment button[aria-pressed=true]{background:var(--ec-panel);color:var(--ec-ink);box-shadow:0 1px 3px light-dark(#26382a13,#00000024);font-weight:600}
+#econ-savings-usd .ec-primary{width:100%;display:flex;align-items:center;justify-content:center;gap:9px;border:0;border-radius:6px;background:var(--ec-accent);color:var(--ec-on-accent);padding:12px 14px;font-size:12px;font-weight:500;margin-top:23px;min-height:42px}
+#econ-savings-usd .ec-form-divider{border:0;border-top:1px solid var(--ec-line);margin:20px 0 16px}
+#econ-savings-usd .ec-example{border:0;background:transparent;color:var(--ec-accent);font-size:10px;padding:0;display:inline-flex;align-items:center;gap:6px}
+#econ-savings-usd .ec-result{padding:23px 23px 16px}
+#econ-savings-usd .ec-projection-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:11px;color:var(--ec-muted);margin:0 0 10px}
+#econ-savings-usd .ec-total{font-size:38px;letter-spacing:-1.6px;line-height:1.2;font-weight:500;font-variant-numeric:tabular-nums;margin:0 0 4px;overflow-wrap:anywhere}
+#econ-savings-usd .ec-total span{font-size:12px;letter-spacing:0;font-weight:400;color:var(--ec-muted);margin-left:6px}
+#econ-savings-usd .ec-result-note{font-size:10px;color:var(--ec-muted);line-height:1.7;margin:0 0 22px}
+#econ-savings-usd .ec-mini-metrics{display:grid;grid-template-columns:1fr 1fr;gap:16px;border-top:1px solid var(--ec-line);padding-top:16px;margin-bottom:22px}
+#econ-savings-usd .ec-mini-metrics p{font-size:10px;color:var(--ec-muted);margin:0 0 6px}
+#econ-savings-usd .ec-mini-metrics strong{font-size:17px;font-weight:500;letter-spacing:-.3px;font-variant-numeric:tabular-nums}
+#econ-savings-usd .ec-chart-toolbar{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:14px;flex-wrap:wrap}
+#econ-savings-usd .ec-view-tabs{display:flex;gap:16px;border-bottom:1px solid var(--ec-line);width:100%;margin-bottom:5px}
+#econ-savings-usd .ec-view-tabs button{background:transparent;border:0;border-bottom:2px solid transparent;color:var(--ec-muted);padding:10px 0;font-size:10px;margin-bottom:-1px}
+#econ-savings-usd .ec-view-tabs button[aria-selected=true]{border-bottom-color:var(--ec-accent);color:var(--ec-ink);font-weight:600}
+#econ-savings-usd .ec-chart{width:100%;min-width:0}
+#econ-savings-usd .ec-chart svg{width:100%;display:block;overflow:visible}
+#econ-savings-usd .ec-chart svg text{font-family:inherit;fill:var(--ec-muted)}
+#econ-savings-usd .ec-chart-readout{display:flex;justify-content:space-between;align-items:center;margin:6px 0 10px;gap:10px;font-size:10px;color:var(--ec-muted);font-variant-numeric:tabular-nums}
+#econ-savings-usd .ec-legend{display:flex;gap:16px;flex-wrap:wrap;align-items:center;font-size:10px;color:var(--ec-muted);padding:5px 0 2px}
+#econ-savings-usd .ec-legend span{display:inline-flex;align-items:center;gap:6px}
+#econ-savings-usd .ec-key{display:inline-block;width:12px;height:3px;border-radius:2px;background:var(--ec-accent)}
+#econ-savings-usd .ec-key.ec-deposits{background:var(--ec-deposit)}
+#econ-savings-usd .ec-assumptions{padding:17px 19px;margin-top:16px;background:var(--ec-soft);border:0;border-radius:var(--ec-radius,10px)}
+#econ-savings-usd .ec-assumptions h3{font-size:11px;font-weight:600;margin:0 0 8px;display:flex;align-items:center;gap:7px}
+#econ-savings-usd .ec-assumption-items{display:flex;flex-wrap:wrap;gap:7px 15px;font-size:10px;line-height:1.7;color:var(--ec-muted)}
+#econ-savings-usd .ec-assumption-items span{display:inline-flex;gap:5px;align-items:baseline}
+#econ-savings-usd .ec-assumption-items span:before{content:'·';color:var(--ec-accent)}
+#econ-savings-usd .ec-assumption-items strong{font-weight:500;color:var(--ec-ink)}
+#econ-savings-usd .ec-footer{border-top:1px solid var(--ec-line);margin-top:25px;padding-top:16px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:10px;color:var(--ec-muted);line-height:1.7}
+#econ-savings-usd .ec-footer span{display:flex;align-items:center;gap:6px}
+#econ-savings-usd .ec-error{color:var(--ec-danger);font-size:11px;line-height:1.6;margin-top:13px}
+#econ-savings-usd .ec-pending{font-size:10px;color:var(--ec-muted);padding:8px 0;margin:0}
+#econ-savings-usd .ec-breakdown{border-top:1px solid var(--ec-line);margin-top:18px;padding-top:16px}
+#econ-savings-usd .ec-breakdown-title{display:flex;justify-content:space-between;font-size:10px;color:var(--ec-muted);margin-bottom:9px}
+#econ-savings-usd .ec-bar{height:7px;display:flex;border-radius:3px;overflow:hidden;background:var(--ec-bg)}
+#econ-savings-usd .ec-bar-deposits{background:var(--ec-deposit)}
+#econ-savings-usd .ec-bar-interest{background:var(--ec-accent)}
+#econ-savings-usd .ec-table-wrap{overflow-x:auto}
+#econ-savings-usd table{width:100%;border-collapse:collapse;font-size:10px;text-align:right;font-variant-numeric:tabular-nums}
+#econ-savings-usd th{font-weight:500;color:var(--ec-muted);padding:12px 5px;border-bottom:1px solid var(--ec-line);white-space:nowrap}
+#econ-savings-usd td{padding:11px 5px;border-bottom:1px solid var(--ec-line);white-space:nowrap}
+#econ-savings-usd th:first-child,#econ-savings-usd td:first-child{text-align:left}
+#econ-savings-usd .ec-table-note{font-size:10px;color:var(--ec-muted);margin:13px 0 3px;line-height:1.7}
+#econ-savings-usd .ec-mobile-brand{display:none}
+#econ-savings-usd .ec-note-dot{padding:0 5px;color:var(--ec-line)}
+#econ-savings-usd .ec-workbench .ec-shell{display:block}
+#econ-savings-usd .ec-workbench .ec-topbar{height:70px;padding:0 30px;gap:25px}
+#econ-savings-usd .ec-workbench .ec-top-links{display:flex;gap:22px;align-items:center;margin-right:auto;font-size:11px;color:var(--ec-muted)}
+#econ-savings-usd .ec-top-links span:first-child{color:var(--ec-ink);font-weight:600}
+#econ-savings-usd .ec-workbench .ec-main{padding:28px 30px}
+#econ-savings-usd .ec-workbench h1{font-family:inherit;font-size:29px;letter-spacing:-1px;font-weight:600}
+#econ-savings-usd .ec-workbench .ec-layout{display:block}
+#econ-savings-usd .ec-workbench .ec-form{margin-bottom:18px;padding:19px 20px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;align-items:start}
+#econ-savings-usd .ec-workbench .ec-section-heading{grid-column:1/-1;margin-bottom:0}
+#econ-savings-usd .ec-workbench .ec-field{margin:0}
+#econ-savings-usd .ec-workbench .ec-timing-field{grid-column:1/3;display:flex;align-items:center;gap:15px}
+#econ-savings-usd .ec-workbench .ec-timing-field .ec-label{margin:0;white-space:nowrap}
+#econ-savings-usd .ec-workbench .ec-timing-field .ec-segment{flex:1}
+#econ-savings-usd .ec-workbench .ec-form-actions{grid-column:3/5;display:flex;justify-content:flex-end;align-items:center;gap:18px}
+#econ-savings-usd .ec-workbench .ec-primary{margin:0;width:auto;padding:10px 20px;min-height:37px}
+#econ-savings-usd .ec-workbench .ec-form-divider,#econ-savings-usd .ec-workbench .ec-form-description{display:none}
+#econ-savings-usd .ec-workbench .ec-result{padding:23px 23px 17px}
+#econ-savings-usd .ec-workbench .ec-summary-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:24px;align-items:end;border-bottom:1px solid var(--ec-line);padding-bottom:20px;margin-bottom:18px}
+#econ-savings-usd .ec-workbench .ec-total{font-size:35px}
+#econ-savings-usd .ec-workbench .ec-result-note{margin:0}
+#econ-savings-usd .ec-workbench .ec-mini-metrics{border:0;margin:0;padding:0}
+#econ-savings-usd .ec-workbench .ec-chart-table{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:23px}
+#econ-savings-usd .ec-workbench .ec-schedule{border-left:1px solid var(--ec-line);padding-left:22px}
+#econ-savings-usd .ec-workbench .ec-table-wrap{max-width:100%}
+#econ-savings-usd .ec-workbench .ec-view-tabs{border:0;margin:0 0 13px}
+#econ-savings-usd .ec-workbench .ec-view-tabs button{border:0;padding:0;color:var(--ec-ink);font-weight:600}
+#econ-savings-usd .ec-workbench .ec-assumptions{margin-top:18px}
+#econ-savings-usd .ec-schedule-title{font-size:11px;font-weight:600;margin:0 0 9px}
+#econ-savings-usd .ec-dense .ec-form{padding:16px}
+#econ-savings-usd .ec-dense .ec-field{margin-bottom:13px}
+#econ-savings-usd .ec-dense .ec-result{padding:18px}
+#econ-savings-usd .ec-dense td{padding:8px 5px}
+#econ-savings-usd [hidden]{display:none!important}
+@media(max-width:850px){#econ-savings-usd .ec-shell{grid-template-columns:128px minmax(0,1fr)}#econ-savings-usd .ec-sidebar{padding:25px 10px}#econ-savings-usd .ec-main{padding:25px 20px}#econ-savings-usd .ec-topbar{padding:0 20px}#econ-savings-usd .ec-layout{grid-template-columns:210px minmax(0,1fr);gap:13px}#econ-savings-usd .ec-result{padding:18px}#econ-savings-usd .ec-total{font-size:31px}#econ-savings-usd .ec-form{padding:18px 15px}#econ-savings-usd .ec-breadcrumb{font-size:10px}#econ-savings-usd .ec-header .ec-quiet-button{padding:8px}#econ-savings-usd .ec-workbench .ec-main{padding:25px 20px}#econ-savings-usd .ec-workbench .ec-topbar{padding:0 20px}#econ-savings-usd .ec-workbench .ec-chart-table{grid-template-columns:1fr}#econ-savings-usd .ec-workbench .ec-schedule{padding:0;border-left:0;border-top:1px solid var(--ec-line);padding-top:18px}}
+@media(max-width:680px){#econ-savings-usd .ec-stage,#econ-savings-usd .ec-shell{min-height:1660px}#econ-savings-usd .ec-shell{display:block}#econ-savings-usd .ec-sidebar{display:none}#econ-savings-usd .ec-mobile-brand{display:flex;font-family:Georgia,serif;font-size:24px;letter-spacing:-1px;color:var(--ec-ink)}#econ-savings-usd .ec-breadcrumb{display:none}#econ-savings-usd .ec-main{padding:24px 17px}#econ-savings-usd .ec-topbar{height:59px;padding:0 18px}#econ-savings-usd h1{font-size:33px}#econ-savings-usd .ec-header{margin-bottom:23px}#econ-savings-usd .ec-header .ec-quiet-button{display:none}#econ-savings-usd .ec-layout{grid-template-columns:1fr;gap:18px}#econ-savings-usd .ec-form{display:grid;grid-template-columns:1fr 1fr;gap:17px;padding:20px}#econ-savings-usd .ec-section-heading{grid-column:1/-1;margin-bottom:0}#econ-savings-usd .ec-field{margin:0}#econ-savings-usd .ec-timing-field,#econ-savings-usd .ec-form-actions,#econ-savings-usd .ec-form-description{grid-column:1/-1}#econ-savings-usd .ec-timing-field{margin-bottom:0}#econ-savings-usd .ec-primary{margin-top:0}#econ-savings-usd .ec-form-divider{margin:16px 0}#econ-savings-usd .ec-form-description{margin:0}#econ-savings-usd .ec-result{padding:20px}#econ-savings-usd .ec-total{font-size:38px}#econ-savings-usd .ec-input-wrap input{font-size:16px}#econ-savings-usd .ec-segment button{min-height:38px}#econ-savings-usd .ec-workbench .ec-form{grid-template-columns:1fr 1fr}#econ-savings-usd .ec-workbench .ec-timing-field{display:block;grid-column:1/-1}#econ-savings-usd .ec-workbench .ec-timing-field .ec-label{margin-bottom:8px}#econ-savings-usd .ec-workbench .ec-form-actions{grid-column:1/-1;justify-content:space-between}#econ-savings-usd .ec-workbench .ec-top-links{display:none}#econ-savings-usd .ec-workbench .ec-summary-grid{grid-template-columns:1fr;gap:20px}#econ-savings-usd .ec-workbench .ec-main{padding:24px 17px}#econ-savings-usd .ec-workbench .ec-chart-table{display:block}#econ-savings-usd .ec-workbench .ec-schedule{margin-top:20px}#econ-savings-usd .ec-workbench .ec-mini-metrics{padding-top:15px;border-top:1px solid var(--ec-line)}#econ-savings-usd .ec-footer{margin-top:22px}#econ-savings-usd .ec-workbench .ec-section-heading{margin:0}#econ-savings-usd .ec-chart-readout{flex-wrap:wrap}}
+@media(prefers-reduced-motion:reduce){#econ-savings-usd *{transition:none!important;scroll-behavior:auto!important}}
+
+#econ-savings-usd{--ec-bg:light-dark(#f6f2f8,#080808);--ec-panel:light-dark(#ffffff,#141414);--ec-ink:light-dark(#211826,#ffffff);--ec-muted:light-dark(#6e6175,#b5aebb);--ec-line:light-dark(#e0d8e6,#2e2832);--ec-accent:light-dark(#8f36a6,#bd68d2);--ec-on-accent:#ffffff;--ec-soft:light-dark(#eee3f3,#211625);--ec-side:light-dark(#eee7f3,#0c0b0d);--ec-deposit:light-dark(#9e8aaa,#837989);--ec-danger:light-dark(#a92935,#ff9ba8);--ec-action:light-dark(#8b36a1,#973bae)}
+#econ-savings-usd .ec-stage{border-radius:12px}
+#econ-savings-usd .ec-shell{background:radial-gradient(ellipse at 100% 0%,light-dark(#b252ca14,#b252ca16),transparent 48%),var(--ec-bg)}
+#econ-savings-usd .ec-brand{font-family:inherit;font-size:30px;font-style:italic;font-weight:800;letter-spacing:-1.6px;gap:0}
+#econ-savings-usd .ec-brand .ec-brand-letter{color:var(--ec-accent)}
+#econ-savings-usd .ec-brand .ec-brand-period{color:var(--ec-ink)}
+#econ-savings-usd .ec-brand-note{font-size:10px;line-height:1.6;margin-top:8px}
+#econ-savings-usd .ec-nav-item.ec-active{background:var(--ec-soft);color:var(--ec-accent);box-shadow:none}
+#econ-savings-usd .ec-topbar{min-height:76px;height:auto;padding-top:13px;padding-bottom:13px}
+#econ-savings-usd .ec-top-actions{display:flex;align-items:center;gap:14px;flex-shrink:0}
+#econ-savings-usd .ec-currency{display:flex;align-items:center;gap:8px;color:var(--ec-muted);font-size:10px}
+#econ-savings-usd .ec-currency select{color:var(--ec-ink);border:1px solid var(--ec-line);background:var(--ec-panel);border-radius:6px;padding:9px 25px 9px 9px;font-size:11px;max-width:169px;min-height:36px}
+#econ-savings-usd h1{font-family:inherit;font-size:40px;font-weight:700;letter-spacing:-1.65px;line-height:1.25}
+#econ-savings-usd .ec-title-accent{color:var(--ec-accent)}
+#econ-savings-usd .ec-eyebrow{font-size:10px;letter-spacing:1.8px;font-weight:600}
+#econ-savings-usd .ec-subtitle{max-width:465px}
+#econ-savings-usd .ec-total{font-size:36px;font-weight:600;letter-spacing:-1.5px;line-height:1.35}
+#econ-savings-usd .ec-total span{font-family:inherit;font-size:11px;font-weight:400;letter-spacing:.3px;white-space:nowrap}
+#econ-savings-usd .ec-primary{background:var(--ec-action);min-height:44px}
+#econ-savings-usd .ec-surface{box-shadow:0 4px 25px light-dark(#40154a04,#00000012)}
+#econ-savings-usd .ec-section-heading{gap:6px}
+#econ-savings-usd .ec-small-tag{color:var(--ec-accent);background:var(--ec-soft);font-size:9px}
+#econ-savings-usd .ec-money-symbol{font-size:13px;min-width:9px;color:var(--ec-muted)}
+#econ-savings-usd .ec-assumptions{background:var(--ec-soft)}
+#econ-savings-usd .ec-fx-note{font-size:10px;line-height:1.7;color:var(--ec-muted);margin:12px 0 0;grid-column:1/-1}
+#econ-savings-usd .ec-form-description{display:none}
+#econ-savings-usd .ec-mini-metrics strong{font-size:16px;font-weight:500;overflow-wrap:anywhere}
+#econ-savings-usd .ec-chart-readout{flex-wrap:wrap;font-size:11px}
+#econ-savings-usd .ec-chart svg text{font-size:11px}
+#econ-savings-usd .ec-workbench h1{font-size:33px;font-weight:700}
+#econ-savings-usd .ec-workbench .ec-topbar{height:auto;min-height:76px}
+#econ-savings-usd .ec-workbench .ec-top-links{gap:18px}
+#econ-savings-usd .ec-workbench .ec-summary-grid{grid-template-columns:1.15fr 1fr;gap:20px}
+#econ-savings-usd .ec-workbench .ec-total{font-size:36px}
+#econ-savings-usd .ec-workbench .ec-chart-table{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:18px}
+#econ-savings-usd .ec-workbench .ec-schedule{padding-left:18px}
+#econ-savings-usd .ec-workbench table{font-size:10px}
+#econ-savings-usd .ec-workbench .ec-form .ec-fx-note{margin:0}
+@media(max-width:1050px){#econ-savings-usd .ec-breadcrumb{display:none}#econ-savings-usd .ec-topbar{justify-content:flex-end}#econ-savings-usd .ec-workbench .ec-topbar{justify-content:space-between}#econ-savings-usd .ec-workbench .ec-top-links{display:none}}
+@media(max-width:850px){#econ-savings-usd .ec-workbench .ec-chart-table{grid-template-columns:1fr}#econ-savings-usd .ec-workbench .ec-schedule{padding-left:0}#econ-savings-usd .ec-total{font-size:30px}#econ-savings-usd .ec-mini-metrics{gap:9px}#econ-savings-usd .ec-mini-metrics strong{font-size:15px}#econ-savings-usd h1{font-size:35px}}
+@media(max-width:680px){#econ-savings-usd .ec-topbar{justify-content:space-between;padding:13px 17px;min-height:67px}#econ-savings-usd .ec-top-actions .ec-badge{display:none}#econ-savings-usd .ec-currency{gap:6px}#econ-savings-usd .ec-currency>span{display:none}#econ-savings-usd .ec-currency select{font-size:13px;max-width:170px;min-height:42px}#econ-savings-usd .ec-mobile-brand{font-family:inherit;font-weight:800;font-style:italic;color:var(--ec-accent)}#econ-savings-usd h1{font-size:31px;letter-spacing:-1.15px}#econ-savings-usd .ec-workbench h1{font-size:31px}#econ-savings-usd .ec-total,#econ-savings-usd .ec-workbench .ec-total{font-size:33px;letter-spacing:-1px}#econ-savings-usd .ec-workbench .ec-summary-grid{grid-template-columns:1fr}#econ-savings-usd .ec-form{gap:18px 13px}#econ-savings-usd .ec-form .ec-label{font-size:11px}#econ-savings-usd .ec-form .ec-input-wrap{padding:0 8px}#econ-savings-usd .ec-input-wrap input{font-size:16px}#econ-savings-usd .ec-input-wrap .ec-unit{font-size:9px}#econ-savings-usd .ec-mini-metrics strong{font-size:16px}#econ-savings-usd .ec-top-actions{gap:0}#econ-savings-usd .ec-workbench .ec-topbar{padding:13px 17px}#econ-savings-usd .ec-workbench .ec-form{padding:17px}#econ-savings-usd .ec-surface{overflow-wrap:break-word}#econ-savings-usd .ec-stage,#econ-savings-usd .ec-shell{min-height:1720px}}
+#econ-savings-usd .ec-stage,#econ-savings-usd .ec-shell{min-height:100vh;border-radius:0}
+#econ-savings-usd .ec-workspace,#econ-savings-usd .ec-results-column{min-width:0}
+#econ-savings-usd .ec-sidebar{min-height:100%}
+#econ-savings-usd .ec-main{max-width:1420px;margin:0 auto;padding-bottom:35px}
+#econ-savings-usd .ec-header-actions{padding-top:8px;display:flex;gap:8px}
+#econ-savings-usd .ec-example-actions{display:flex;justify-content:space-between;gap:14px}
+#econ-savings-usd .ec-empty{padding:70px 20px 80px;text-align:center;min-height:410px;display:flex;flex-direction:column;justify-content:center;align-items:center}
+#econ-savings-usd .ec-empty h2{font-size:23px;font-weight:600;letter-spacing:-.7px;margin:19px 0 10px}
+#econ-savings-usd .ec-empty p{font-size:12px;line-height:1.9;color:var(--ec-muted);max-width:310px;margin:0 0 22px}
+#econ-savings-usd .ec-empty-mark{font-size:40px;color:var(--ec-accent)}
+#econ-savings-usd .ec-field-error{display:block;font-size:11px;color:var(--ec-danger);line-height:1.6;margin-top:6px}
+#econ-savings-usd [aria-invalid=true]{color:var(--ec-danger)}
+#econ-savings-usd .ec-input-wrap:has([aria-invalid=true]){border-color:var(--ec-danger)}
+#econ-savings-usd .ec-period-picker{display:flex;align-items:center;gap:10px;font-size:11px;color:var(--ec-muted);margin:14px 0 5px}
+#econ-savings-usd .ec-period-picker select{min-width:130px;max-width:100%;background:var(--ec-panel);color:var(--ec-ink);border:1px solid var(--ec-line);border-radius:5px;font-size:11px;padding:7px}
+#econ-savings-usd .ec-metadata{border-top:1px solid var(--ec-line);margin-top:22px;padding-top:17px;font-size:11px;line-height:1.8;color:var(--ec-muted)}
+#econ-savings-usd .ec-metadata summary{color:var(--ec-ink)}
+#econ-savings-usd .ec-metadata dl{margin:16px 0 8px}
+#econ-savings-usd .ec-metadata dl>div{display:flex;justify-content:space-between;gap:14px;border-bottom:1px solid var(--ec-line);padding:6px 0}
+#econ-savings-usd .ec-metadata dd{margin:0;color:var(--ec-ink);text-align:right;overflow-wrap:anywhere}
+#econ-savings-usd .ec-export-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+#econ-savings-usd .ec-file-note{font-size:10px;color:var(--ec-muted);line-height:1.8;margin:12px 0 0}
+#econ-savings-usd .ec-stale .ec-total,#econ-savings-usd .ec-stale .ec-mini-metrics{opacity:.55}
+#econ-savings-usd .ec-stale #result-badge{background:var(--ec-soft)}
+#econ-savings-usd .ec-chart-readout{font-size:11px}
+#econ-savings-usd table{font-size:11px}
+#econ-savings-usd .ec-quiet-button:disabled,#econ-savings-usd .ec-primary:disabled{opacity:.45}
+#econ-savings-usd button:not(:disabled),#econ-savings-usd select{cursor:pointer}
+@media(min-width:1250px){#econ-savings-usd .ec-shell{grid-template-columns:190px minmax(0,1fr)}#econ-savings-usd .ec-sidebar{padding:35px 22px}#econ-savings-usd .ec-layout{grid-template-columns:280px minmax(0,1fr);gap:24px}#econ-savings-usd .ec-main{padding:36px 38px}#econ-savings-usd .ec-result{padding:28px}#econ-savings-usd .ec-form{padding:24px}}
+@media(max-width:680px){#econ-savings-usd .ec-stage,#econ-savings-usd .ec-shell{min-height:100vh}#econ-savings-usd .ec-header{flex-wrap:wrap;gap:10px}#econ-savings-usd .ec-header-actions{padding:0}#econ-savings-usd .ec-header .ec-quiet-button{display:inline-flex;min-height:40px}#econ-savings-usd .ec-empty{min-height:320px;padding:35px 5px}#econ-savings-usd .ec-empty h2{font-size:21px}#econ-savings-usd .ec-metadata dl>div{flex-direction:column;gap:0}#econ-savings-usd .ec-metadata dd{text-align:left}#econ-savings-usd .ec-file-note{font-size:11px}#econ-savings-usd .ec-example{min-height:40px;font-size:12px}#econ-savings-usd .ec-view-tabs button{font-size:11px;min-height:44px}}
+#econ-savings-usd .ec-mode-switch{max-width:390px;margin:0 0 22px;padding:4px;gap:5px}
+#econ-savings-usd .ec-mode-switch button{font-size:12px;min-height:40px;padding:9px 15px}
+#econ-savings-usd .ec-mode-switch button[aria-pressed=true]{background:var(--ec-soft);color:var(--ec-accent);box-shadow:none}
+#econ-savings-usd .ec-goal-dates{grid-column:1/-1;min-width:0;margin-bottom:19px}
+#econ-savings-usd .ec-goal-dates input{min-width:0;font-size:14px}
+#econ-savings-usd .ec-goal-dates>.ec-helper{margin-bottom:18px}
+#econ-savings-usd .ec-goal-summary{padding-bottom:22px;margin-bottom:22px;border-bottom:1px solid var(--ec-line)}
+#econ-savings-usd .ec-goal-label{font-size:12px;font-weight:500;color:var(--ec-accent);margin:0 0 10px}
+#econ-savings-usd .ec-goal-monthly{font-size:40px;font-weight:600;letter-spacing:-1.5px;font-variant-numeric:tabular-nums;line-height:1.4;overflow-wrap:anywhere}
+#econ-savings-usd .ec-goal-monthly>span{font-size:11px;font-weight:400;letter-spacing:0;margin-left:8px;color:var(--ec-muted)}
+#econ-savings-usd .ec-goal-target{font-size:12px;line-height:1.8;margin:5px 0 8px}
+#econ-savings-usd .ec-goal-period{font-size:11px;line-height:1.8;color:var(--ec-muted);margin:0 0 9px}
+#econ-savings-usd .ec-goal-details{font-size:11px;color:var(--ec-muted);line-height:1.9;margin-top:12px}
+#econ-savings-usd .ec-goal-details dl{margin:10px 0 0}
+#econ-savings-usd .ec-goal-details dl>div{display:flex;justify-content:space-between;gap:15px}
+#econ-savings-usd .ec-goal-details dd{margin:0;color:var(--ec-ink)}
+#econ-savings-usd .ec-goal-key{height:0;background:transparent;border-top:1px dashed var(--ec-muted)}
+#econ-savings-usd .ec-goal-result .ec-total{font-size:29px}
+@media(max-width:680px){#econ-savings-usd .ec-mode-switch{max-width:100%}#econ-savings-usd .ec-goal-dates .ec-field{margin-bottom:18px}#econ-savings-usd .ec-goal-dates input{font-size:16px}#econ-savings-usd .ec-goal-monthly{font-size:35px}#econ-savings-usd .ec-goal-details dl>div{flex-wrap:wrap;gap:0 10px}}
+#econ-savings-usd #result{scroll-margin-top:16px}
+@media(max-width:680px){#econ-savings-usd .ec-goal-input-mode .ec-field[for="annual_effective_rate_percent"]{grid-column:1/-1}#econ-savings-usd .ec-goal-dates{margin-bottom:0}#econ-savings-usd .ec-goal-dates>.ec-helper{margin-bottom:0}}
+#econ-savings-usd .ec-stale .ec-goal-monthly{opacity:.55}
+#econ-savings-usd .ec-stale #stale-message{color:var(--ec-accent);font-size:11px;margin-bottom:14px}
+/* Shared calculator navigation and monthly cash flow. */
+#econ-savings-usd a.ec-nav-item{display:block;text-decoration:none;font-size:12px;color:var(--ec-muted)}
+#econ-savings-usd a.ec-nav-item.ec-active{color:var(--ec-accent)}
+#econ-savings-usd a:focus-visible{outline:3px solid var(--ec-accent);outline-offset:3px}
+#econ-savings-usd .ec-calculator-nav{display:none}
+#econ-savings-usd .ec-cash-layout{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);gap:24px;align-items:start}
+#econ-savings-usd .ec-cash-form{padding:25px;min-width:0}
+#econ-savings-usd .ec-cash-form .ec-section-heading{margin-bottom:12px}
+#econ-savings-usd .ec-cash-intro{font-size:11px;color:var(--ec-muted);line-height:1.8;margin:0 0 25px;max-width:470px}
+#econ-savings-usd .ec-cash-group{border:0;border-top:1px solid var(--ec-line);padding:19px 0 0;margin:0 0 26px;min-width:0}
+#econ-savings-usd .ec-cash-group legend{font-size:13px;font-weight:600;color:var(--ec-accent);padding:0 10px 0 0}
+#econ-savings-usd .ec-cash-group legend span{font-size:10px;font-weight:400;color:var(--ec-muted);margin-left:8px}
+#econ-savings-usd .ec-cash-row{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) 28px;gap:10px;align-items:start;margin-bottom:14px}
+#econ-savings-usd .ec-cash-row .ec-field{margin:0}
+#econ-savings-usd .ec-cash-row .ec-input-wrap{min-height:44px}
+#econ-savings-usd .ec-cash-row input{font-size:12px}
+#econ-savings-usd .ec-cash-row input[type=number]{appearance:textfield;-moz-appearance:textfield}
+#econ-savings-usd .ec-cash-row input::-webkit-inner-spin-button,#econ-savings-usd .ec-cash-row input::-webkit-outer-spin-button{appearance:none;margin:0}
+#econ-savings-usd .ec-cash-remove{margin-top:25px;height:40px;border:0;background:transparent;color:var(--ec-muted);font-size:21px;padding:0}
+#econ-savings-usd .ec-cash-remove:hover:not(:disabled){color:var(--ec-danger)}
+#econ-savings-usd .ec-cash-remove:disabled{opacity:.2}
+#econ-savings-usd .ec-cash-add{color:var(--ec-accent);font-size:11px;min-height:36px;border:1px dashed var(--ec-line);border-radius:6px;background:transparent;padding:7px 12px}
+#econ-savings-usd .ec-cash-ratio{font-size:11px;color:var(--ec-muted);display:flex;justify-content:space-between;gap:15px;line-height:1.8;border-bottom:1px solid var(--ec-line);padding:0 0 21px;margin-top:20px}
+#econ-savings-usd .ec-cash-ratio strong{font-weight:400;color:var(--ec-ink);overflow-wrap:anywhere;text-align:right}
+#econ-savings-usd .ec-cash-breakdown{margin-top:22px}
+#econ-savings-usd .ec-cash-breakdown>p{font-size:10px;color:var(--ec-muted);line-height:1.8;margin:7px 0 20px}
+#econ-savings-usd .ec-cash-category{margin-bottom:18px}
+#econ-savings-usd .ec-cash-category-heading{display:flex;justify-content:space-between;gap:12px;align-items:baseline;font-size:11px;line-height:1.8;margin-bottom:7px}
+#econ-savings-usd .ec-cash-category-heading span{min-width:0;overflow-wrap:anywhere;color:var(--ec-muted)}
+#econ-savings-usd .ec-cash-category-heading strong{font-weight:400;overflow-wrap:anywhere;text-align:right}
+#econ-savings-usd .ec-cash-track{height:5px;border-radius:6px;background:var(--ec-soft);overflow:hidden}
+#econ-savings-usd .ec-cash-fill{height:100%;border-radius:6px;background:var(--ec-accent)}
+#econ-savings-usd .ec-cash-share{font-size:9px;color:var(--ec-muted);margin:5px 0 0}
+#econ-savings-usd .ec-cash-shortfall .ec-total{color:var(--ec-danger)}
+#econ-savings-usd #cash-result{scroll-margin-top:16px}
+@media(max-width:1050px){#econ-savings-usd .ec-cash-layout{grid-template-columns:1fr}}
+@media(max-width:680px){
+#econ-savings-usd .ec-calculator-nav{display:flex;gap:5px;margin-bottom:24px;border:1px solid var(--ec-line);padding:4px;border-radius:7px;background:var(--ec-panel)}
+#econ-savings-usd .ec-calculator-nav a{flex:1;text-align:center;padding:10px 7px;font-size:12px;color:var(--ec-muted);text-decoration:none;border-radius:4px}
+#econ-savings-usd .ec-calculator-nav a[aria-current=page]{color:var(--ec-accent);background:var(--ec-soft)}
+#econ-savings-usd .ec-cash-form{padding:20px}
+#econ-savings-usd .ec-cash-row{gap:8px;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) 25px}
+#econ-savings-usd .ec-cash-row input{font-size:16px}
+#econ-savings-usd .ec-cash-row .ec-label{font-size:10px}
+#econ-savings-usd .ec-cash-group legend span{font-size:9px}
+#econ-savings-usd .ec-cash-remove{height:44px;margin-top:23px}
+#econ-savings-usd .ec-cash-add{min-height:42px;font-size:12px}
+#econ-savings-usd .ec-cash-intro{font-size:11px}
+#econ-savings-usd .ec-cash-form .ec-primary{margin-top:20px}
+#econ-savings-usd .ec-cash-layout{gap:18px}
+}
+/* Private accounts and explicit saved plans. */
+#econ-savings-usd .ec-account-link{font-size:11px;color:var(--ec-accent);text-decoration:none;max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#econ-savings-usd .ec-auth-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.8fr);gap:25px;max-width:1050px;align-items:start}
+#econ-savings-usd .ec-auth-panel,#econ-savings-usd .ec-library-panel{padding:28px;min-width:0}
+#econ-savings-usd .ec-auth-tabs{margin-bottom:25px}
+#econ-savings-usd .ec-auth-tabs button{font-size:11px;min-height:40px}
+#econ-savings-usd .ec-auth-panel h2{margin:0 0 22px;font-size:18px}
+#econ-savings-usd .ec-auth-panel .ec-field{margin-top:20px}
+#econ-savings-usd .ec-account-explanation{margin:0;padding:25px}
+#econ-savings-usd .ec-account-explanation p{font-size:11px;color:var(--ec-muted);line-height:1.9;margin:16px 0 0}
+#econ-savings-usd .ec-library-link{margin-top:20px;text-decoration:none;color:var(--ec-ink)}
+#econ-savings-usd .ec-recovery-secret{border:1px solid var(--ec-accent);border-radius:8px;padding:20px;margin-top:25px}
+#econ-savings-usd .ec-recovery-secret h2{font-size:15px;margin:0 0 10px}
+#econ-savings-usd #new-recovery-code{font-family:ui-monospace,monospace;font-size:11px}
+#econ-savings-usd .ec-account-save{border-top:1px solid var(--ec-line);margin-top:22px;padding-top:20px}
+#econ-savings-usd .ec-account-save .ec-field{margin:0}
+#econ-savings-usd .ec-account-save .ec-export-actions{margin-top:12px}
+#econ-savings-usd .ec-account-save input{font-size:12px}
+#econ-savings-usd .ec-plan-list{margin-top:23px}
+#econ-savings-usd .ec-plan-card{display:flex;justify-content:space-between;gap:25px;align-items:center;border-top:1px solid var(--ec-line);padding:21px 0}
+#econ-savings-usd .ec-plan-card>div{min-width:0}
+#econ-savings-usd .ec-plan-card h3{font-size:14px;font-weight:500;overflow-wrap:anywhere;margin:0}
+#econ-savings-usd .ec-plan-actions{display:flex;gap:18px;align-items:center;flex-shrink:0}
+#econ-savings-usd .ec-plan-actions a{text-decoration:none;color:var(--ec-ink)}
+@media(max-width:1050px){#econ-savings-usd .ec-top-actions{flex-wrap:wrap;justify-content:flex-end}#econ-savings-usd .ec-auth-layout{grid-template-columns:1fr}}
+@media(max-width:680px){
+#econ-savings-usd .ec-top-actions{gap:8px;max-width:78%}
+#econ-savings-usd .ec-account-link{font-size:11px;max-width:100px}
+#econ-savings-usd .ec-top-actions #account-logout{min-height:32px;font-size:11px}
+#econ-savings-usd .ec-auth-panel,#econ-savings-usd .ec-library-panel{padding:20px}
+#econ-savings-usd .ec-auth-panel input,#econ-savings-usd .ec-account-save input{font-size:16px}
+#econ-savings-usd .ec-auth-panel .ec-primary{margin-top:22px}
+#econ-savings-usd .ec-plan-card{align-items:flex-start;flex-direction:column;gap:13px}
+#econ-savings-usd .ec-plan-actions{width:100%;justify-content:space-between}
+#econ-savings-usd .ec-auth-panel .ec-field{margin-bottom:20px}
+#econ-savings-usd .ec-calculator-nav a{font-size:11px}
+}

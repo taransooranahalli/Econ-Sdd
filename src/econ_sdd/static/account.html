@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="csrf-token" content="__CSRF_TOKEN__">
+<title>Econ · Your account</title>
+<link rel="stylesheet" href="/static/styles.css">
+<script src="/static/account.js" defer></script>
+</head>
+<body>
+<div id="econ-savings-usd"><div id="ec-studio" class="ec-stage"><div class="ec-shell">
+<aside class="ec-sidebar">
+  <div class="ec-brand"><span class="ec-brand-letter">E</span>con<span class="ec-brand-period">.</span></div>
+  <div class="ec-brand-note">Personal finance. Your way.</div>
+  <div class="ec-nav-caption">Your workspace</div>
+  <nav aria-label="Application navigation"><a class="ec-nav-item" href="/">Savings</a><a class="ec-nav-item" href="/cash-flow">Cash flow</a><a class="ec-nav-item" href="/plans">Saved plans</a><button class="ec-nav-item" disabled>Investments · later</button></nav>
+  <div class="ec-nav-footer">Personal workspace<br>Runs on your computer</div>
+</aside>
+<div class="ec-workspace">
+<header class="ec-topbar"><div class="ec-mobile-brand">Econ.</div><div class="ec-breadcrumb">Workspace <span>/</span> Calculators <span>/</span> <strong>Account</strong></div><div class="ec-top-actions"><a class="ec-account-link" id="account-link" href="/account">Sign in</a><button id="account-logout" type="button" class="ec-example" hidden>Sign out</button><span class="ec-badge">Local workspace</span></div></header>
+<main class="ec-main">
+<nav class="ec-calculator-nav" aria-label="Mobile calculator navigation"><a href="/">Savings</a><a href="/cash-flow">Cash flow</a><a href="/plans">Saved plans</a></nav>
+<p id="account-notice" class="ec-file-note" role="status" hidden></p>
+<header class="ec-header"><div><p class="ec-eyebrow">Your personal workspace</p><h1>Your <span class="ec-title-accent">account.</span></h1><p class="ec-subtitle">One account. Your calculators, ready to revisit.</p></div></header>
+<div class="ec-auth-layout"><section class="ec-surface ec-auth-panel" aria-label="Account access">
+<div id="signed-out-forms"><div class="ec-segment ec-auth-tabs" role="group" aria-label="Account action"><button type="button" data-auth-mode="login" aria-pressed="true">Sign in</button><button type="button" data-auth-mode="register" aria-pressed="false">Create account</button><button type="button" data-auth-mode="recover" aria-pressed="false">Recover</button></div>
+<form id="account-form" novalidate><h2 id="auth-heading">Welcome back.</h2>
+<label class="ec-field" for="username"><span class="ec-label">Username</span><span class="ec-input-wrap"><input id="username" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" minlength="3" maxlength="32" aria-describedby="username-help"></span></label><p id="username-help" class="ec-helper">3–32 letters, digits, periods, underscores or hyphens. Not case-sensitive.</p>
+<label class="ec-field" id="recovery-code-field" for="recovery-code" hidden><span class="ec-label">Recovery code</span><span class="ec-input-wrap"><input id="recovery-code" type="password" maxlength="100" autocomplete="off"></span></label>
+<label class="ec-field" for="password"><span id="password-label" class="ec-label">Password</span><span class="ec-input-wrap"><input id="password" type="password" maxlength="128" autocomplete="current-password"></span></label>
+<p id="new-password-help" class="ec-helper" hidden>Use 15–128 characters. Your recovery code is shown once after account creation. Keep it somewhere safe; it is needed if you forget your password.</p><button id="auth-submit" class="ec-primary" type="submit" disabled>Checking accounts…</button></form></div>
+<div id="signed-in-controls" hidden><h2 id="signed-in-heading">Your account</h2><p class="ec-helper">Your saved calculator plans are available from your library.</p><a class="ec-quiet-button ec-library-link" href="/plans">Open saved plans ↗</a>
+<details class="ec-metadata"><summary>Change password</summary><form id="password-form" novalidate><label class="ec-field" for="current-password"><span class="ec-label">Current password</span><span class="ec-input-wrap"><input id="current-password" type="password" autocomplete="current-password" maxlength="128"></span></label><label class="ec-field" for="new-password"><span class="ec-label">New password</span><span class="ec-input-wrap"><input id="new-password" type="password" autocomplete="new-password" maxlength="128"></span></label><p class="ec-helper">15–128 characters. Changing it signs out other sessions and replaces your recovery code.</p><button class="ec-primary" type="submit">Change password</button></form></details></div>
+<p id="auth-message" class="ec-file-note" role="status" hidden></p><p id="auth-error" class="ec-error" role="alert" hidden></p>
+<section id="recovery-secret" class="ec-recovery-secret" aria-label="New recovery code" hidden><h2>Keep your recovery code safe.</h2><p class="ec-helper">Shown once. Anyone with this code and your username can reset your password. A previous code no longer works. If you lose both your password and this code, there is no self-service recovery.</p><label class="ec-field" for="new-recovery-code"><span class="ec-label">One-time recovery code</span><span class="ec-input-wrap"><input id="new-recovery-code" type="text" readonly autocomplete="off" spellcheck="false"></span></label><button id="dismiss-recovery" type="button" class="ec-quiet-button">I have saved my code</button></section>
+</section><section class="ec-assumptions ec-account-explanation" aria-label="Account privacy"><h3>Your plans, kept private.</h3><p>Saved names and calculator inputs are encrypted in the database. Passwords are protected with one-way hashes. Only plans you explicitly save are retained.</p><p>The running app can decrypt your plans when you open them. This is server-managed encryption. Downloaded JSON and CSV files remain unencrypted.</p><p>This local app uses SQLite. Public hosting and secure backup setup are a separate step.</p></section></div><footer class="ec-footer"><span>Private account storage · explicit saves only</span><span>Econ · encrypted plans</span></footer></main></div></div></div></div></body></html>

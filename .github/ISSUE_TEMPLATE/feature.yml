@@ -1,0 +1,26 @@
+name: Specify a feature
+description: Define a small, reviewable SDD milestone before implementation.
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: User problem and intended outcome
+    validations:
+      required: true
+  - type: textarea
+    id: contract
+    attributes:
+      label: Inputs, outputs and assumptions
+      description: Include units, timing, data sources, missing-data behavior and privacy where relevant.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria and independent verification
+    validations:
+      required: true
+  - type: textarea
+    id: boundaries
+    attributes:
+      label: Scope limits and deferred questions
