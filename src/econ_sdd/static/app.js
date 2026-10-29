@@ -308,7 +308,7 @@ document.fonts.ready.then(renderChart);
 fetch('/api/config',{cache:'no-store',credentials:'same-origin'}).then(response=>{if(!response.ok)throw new Error();return response.json();}).then(config=>{
   state.config=config;$('currency').replaceChildren();
   config.currencies.forEach(c=>{const option=document.createElement('option');option.value=c.code;option.textContent=c.code+' · '+c.name;$('currency').append(option);});
-  $('currency').value=config.default_currency;$('app-version').textContent='Econ '+config.app_version+' · '+config.model_version;
+  $('currency').value=config.default_currency;$('app-version').textContent='Finance '+config.app_version+' · '+config.model_version;
   updateCurrencyLabels();updateDuration();setBusy(false);
 }).catch(()=>{showErrors({form:'Cannot load the local calculator. Refresh the page after starting Python.'});$('calculate').textContent='Calculator unavailable';});
 window.econCalculator={

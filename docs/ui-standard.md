@@ -48,3 +48,7 @@ User requested 2026-10-28: navigation order is Savings, Cash flow, Investments, 
 ## Proposed Stocks and Portfolios extension
 
 Retain Investments before Saved plans and add Growth / Stocks / Portfolios subnavigation under Investments. Reuse Studio controls, surfaces, typography, keyboard states and phone stacking. Market-data pages must show actual source currency/coverage/age; they cannot reinterpret USD quotes using the hypothetical calculators currency switch. [Draft journeys and states](stock-portfolio-spec.md#2-journeys-and-studio-layout) await review.
+
+## Website title — 2026-10-29
+
+User selected Finance as the website title for both the local app and GitHub Pages. All page document titles are Finance; visible desktop/mobile branding and app footer names use Finance consistently while preserving Studio styling. This presentation change does not rename repository/package identifiers or change saved-data contracts.

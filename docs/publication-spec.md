@@ -28,3 +28,7 @@ GitHub Pages serves static HTML/CSS/JavaScript. Durable FastAPI/SQLite hosting l
 - [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages)
 - [Pages custom workflows](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)
 - [Render free storage limits](https://render.com/docs/free)
+
+## Public website naming
+
+The user selected Finance for the website title on 2026-10-29. The GitHub Pages document title and visible brand must match the local app's Finance name. The existing repository/project URL continues to identify the source.
