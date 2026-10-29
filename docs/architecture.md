@@ -62,3 +62,7 @@ Keep the Python/SQLite app intact. Publish an allowlisted static portfolio under
 ## Investment growth extension
 
 Add pure finance/investments.py and serialization/investments.py; reuse validated common savings conventions and its exact-root helper/zero-fee engine without changing savings behavior. web.py adds guarded investment endpoints; account_api.py dispatches the encrypted investment_growth payload without a SQL schema migration. investments.html/js render server values using the accepted Studio surfaces. No new dependency or provider. [Contract](investment-spec.md).
+
+## Local startup and release metadata — 2026-10-29
+
+The local CLI and macOS launcher default to 127.0.0.1:8004, matching the working browser URL; --port remains available for explicit alternatives. The Python process must remain running for local URLs to work; stopping it or restarting the computer requires starting it again. This is not an automatically installed background service. Account storage remains in its existing project location. Package metadata reads the version from econ_sdd.__version__ so installed and displayed release versions agree.

@@ -106,8 +106,8 @@ class SavingsGoal:
                    sample_derived=data.get("sample_derived", False), name=data.get("name", ""))
 
     def as_record(self) -> dict:
-        return {"schema_version": 1, "calculation_mode": "goal", "initial_balance": str(self.initial_balance),
-                "goal_amount": str(self.goal_amount), "annual_effective_rate_percent": str(self.annual_effective_rate_percent),
+        return {"schema_version": 1, "calculation_mode": "goal", "initial_balance": format(self.initial_balance, "f"),
+                "goal_amount": format(self.goal_amount, "f"), "annual_effective_rate_percent": format(self.annual_effective_rate_percent, "f"),
                 "start_date": self.start_date.isoformat(), "target_date": self.target_date.isoformat(),
                 "contribution_timing": self.contribution_timing, "currency": self.currency,
                 "source": self.source, "sample_derived": self.sample_derived, "name": self.name}

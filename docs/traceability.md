@@ -22,6 +22,8 @@ The specifications define intended behavior; code implements it; tests check it.
 
 - Investment arithmetic fixture: $1,000 + $100/month, constructed 1.01 monthly gross factor, 1.2% annual nominal fee, 12 months -> **$2,374.53**, deducted fees **$19.61**, fee impact **$20.55**. Exact Fraction cash-flow/fee sums and independent 110-digit references check the model.
 
+Current operational verification and tiny-rate compatibility regressions: [2026-10-29 record](verification-2026-10-29.md), [file/account reopening tests](../tests/integration/test_canonical_inputs.py).
+
 ## What the history means
 
 After GitHub’s README initialization, the first application commit is a reviewed snapshot of work developed locally with its specifications. The milestone record in plan.md describes that work; it is not a fabricated sequence of earlier Git commits. Future changes can use branches, issue acceptance criteria and pull requests to make the specification-to-test progression visible.

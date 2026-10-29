@@ -66,3 +66,9 @@ JSON raw monetary values remain strings; UI display values and CSV derive from t
 ## Investment records
 
 [Investment data contract](investment-spec.md#data-api-and-encrypted-plans) defines investment-growth-v1, the investment_growth kind, explicit decimal inputs and recomputed JSON/CSV/account saves. Canonical inputs use fixed-point strings (never exponent notation), including tiny supported rates. Compact JSON preserves all monthly rows within the 1 MiB import cap.
+
+## Canonical input notation — 2026-10-29 clarification
+
+Every saved original money/rate input uses fixed-point decimal text, including very small supported rates. Exporting a valid decimal must not turn it into exponent notation that the strict input parser rejects. This applies to Savings, Goals, Investments and canonical encrypted input saves. Reopening recalculates without changing model conventions or trusting derived results.
+
+Compatibility repair for pre-0.5.1 records: after checking a supported savings/goal result or encrypted-plan model version, bounded uppercase-E annual-rate strings previously emitted by Decimal are converted to equivalent fixed-point text and then fully validated. This does not change numeric meaning or rewrite the stored plan automatically. Raw/manual scenarios still reject exponent notation; unsupported versions and out-of-range/overprecision values remain rejected.

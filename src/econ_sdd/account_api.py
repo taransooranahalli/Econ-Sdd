@@ -12,7 +12,7 @@ from .finance.cash_flow import CASH_FLOW_MODEL_VERSION,CashFlowBudget,calculate_
 from .finance.goals import GOAL_MODEL_VERSION,SavingsGoal,solve_goal
 from .finance.savings import MODEL_VERSION,SavingsScenario,calculate_savings
 from .serialization.cash_flow import cash_flow_record,cash_flow_display
-from .serialization.records import result_record,result_display
+from .serialization.records import result_record,result_display,legacy_rate_inputs
 
 from .finance.investments import MODEL_VERSION as INVESTMENT_MODEL_VERSION, InvestmentScenario, calculate_investments
 from .serialization.investments import investment_record, investment_display
@@ -49,7 +49,8 @@ def calculate_model(kind,model):
 def reopened_calculation(value):
     kind=value['kind']
     if kind not in VERSIONS or value['model_version']!=VERSIONS[kind]:raise AccountError(422,'This saved model needs a reviewed migration before it can be opened.')
-    model=MODELS[kind].from_mapping(value['inputs'])
+    inputs=legacy_rate_inputs(value['inputs']) if kind in {'savings','goal'} else value['inputs']
+    model=MODELS[kind].from_mapping(inputs)
     return calculate_model(kind,model)
 
 

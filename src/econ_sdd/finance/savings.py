@@ -118,9 +118,9 @@ class SavingsScenario:
     def as_record(self) -> dict[str, Any]:
         return {
             "schema_version": SCHEMA_VERSION,
-            "initial_balance": str(self.initial_balance),
-            "monthly_contribution": str(self.monthly_contribution),
-            "annual_effective_rate_percent": str(self.annual_effective_rate_percent),
+            "initial_balance": format(self.initial_balance, "f"),
+            "monthly_contribution": format(self.monthly_contribution, "f"),
+            "annual_effective_rate_percent": format(self.annual_effective_rate_percent, "f"),
             "duration_months": self.duration_months,
             "contribution_timing": self.contribution_timing,
             "currency": self.currency, "source": self.source,

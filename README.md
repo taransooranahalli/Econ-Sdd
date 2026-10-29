@@ -41,9 +41,9 @@ From this project folder, initialize account storage once, then start the app:
 .venv/bin/python -m econ_sdd
 ```
 
-Open http://127.0.0.1:8000/ in your browser. Stop the application with Ctrl-C. Use `--port 8001` if port 8000 is occupied. The launcher binds only to 127.0.0.1 and has no public-host option.
+Open http://127.0.0.1:8004/ in your browser. Keep Python running while using the app; closing it or restarting your computer makes the local URL unavailable until you start it again. Stop the application with Ctrl-C. Use `--port 8005` if port 8004 is occupied. The launcher binds only to 127.0.0.1 and has no public-host option.
 
-Alternatively, on macOS, open `Start Econ.command` in this folder.
+Alternatively, on macOS, double-click `Start Econ.command` in this folder. It starts the same local address in Terminal; leave that Terminal open. GitHub Pages is a static showcase and cannot keep the Python app running.
 
 ## Use
 

@@ -3,6 +3,7 @@ from decimal import Context, Decimal, ROUND_HALF_EVEN, localcontext
 import csv
 import io
 import json
+import re
 from typing import Any
 
 from econ_sdd import __version__
@@ -42,6 +43,23 @@ def load_json(payload: bytes) -> Any:
     return value
 
 
+def legacy_rate_inputs(data: Any) -> Any:
+    """Repair only bounded rate notation emitted by older supported models.
+
+    Call only after checking a saved record's model version, never on manual inputs.
+    The exponent bound prevents untrusted records from expanding enormous strings.
+    """
+    if not isinstance(data, dict):
+        return data
+    raw = data.get("annual_effective_rate_percent")
+    if not isinstance(raw, str) or len(raw) > 128 or not re.fullmatch(r"[+-]?\d+(?:\.\d+)?E[+-]?\d{1,2}", raw):
+        return data
+    rate = Decimal(raw)
+    if -24 <= rate.as_tuple().exponent <= 2 and -99 <= rate <= 100:
+        return {**data, "annual_effective_rate_percent": format(rate, "f")}
+    return data
+
+
 def scenario_from_record(data: Any) -> SavingsScenario:
     if not isinstance(data, dict):
         raise ScenarioError({"file": "Use a scenario JSON object."})
@@ -52,7 +70,7 @@ def scenario_from_record(data: Any) -> SavingsScenario:
     if data.get("model_version") != MODEL_VERSION:
         raise ScenarioError({"file": "This model version is not supported; a reviewed migration is required."})
     # Saved totals and rows are deliberately ignored and recomputed by the caller.
-    return SavingsScenario.from_mapping(data["scenario"])
+    return SavingsScenario.from_mapping(legacy_rate_inputs(data["scenario"]))
 
 
 def projection_record(projection: SavingsProjection, *, now: datetime | None = None) -> dict:
@@ -110,7 +128,7 @@ def calculation_from_record(data: Any) -> SavingsScenario | SavingsGoal:
             raise ScenarioError({"file": "This goal result schema version is not supported."})
         if data.get("model_version") != GOAL_MODEL_VERSION:
             raise ScenarioError({"file": "This goal model version is not supported; a reviewed migration is required."})
-        return SavingsGoal.from_mapping(data.get("goal"))
+        return SavingsGoal.from_mapping(legacy_rate_inputs(data.get("goal")))
     if isinstance(data, dict) and "scenario" not in data:
         return calculation_input(data)
     return scenario_from_record(data)
@@ -171,7 +189,7 @@ def export_csv(projection: SavingsProjection | GoalSolution) -> str:
     metadata = {
         "currency": s.currency, "initial_balance": amount_text(s.initial_balance, s.currency),
         "monthly_contribution": amount_text(s.monthly_contribution, s.currency),
-        "annual_effective_rate_percent": str(s.annual_effective_rate_percent),
+        "annual_effective_rate_percent": format(s.annual_effective_rate_percent, "f"),
         "duration_months": s.duration_months, "contribution_timing": s.contribution_timing,
         "rate_convention": "annual_effective", "output_category": "conditional_projection",
         "source": s.source, "sample_derived": str(s.sample_derived).lower(),

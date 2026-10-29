@@ -13,6 +13,7 @@ The project is deliberately incomplete. The current release establishes calculat
 | Investment growth | Implemented locally in 0.5.0 | [Investment growth contract](investment-spec.md): manual total return, fees, inflation, Studio UI and encrypted plans |
 | Portfolio allocation and rebalancing | User requested later | Instruments, target weights, valuation, cash, rounding, drift and transaction-cost rules before implementation |
 | Holdings and historical return analysis | User requested later | Transactions, deposits/withdrawals, total/time-weighted/money-weighted returns, distributions, corporate actions, benchmarks and data provenance |
+| Bank/account connections | Possible later; not authorized or connected | Separate consent, provider/permissions, token storage, sync/reconciliation, revocation and privacy contract before implementation |
 | Prediction-market analysis | Planned | Event/outcome definitions, market-implied probabilities, fees/spreads/liquidity, resolution rules, timestamps and data provenance; analysis before execution |
 | Forecasting / ML experiments | Planned, separate research track | Target/horizon, information cutoff, chronological evaluation, leakage/bias controls, baselines, uncertainty and reproducibility |
 | C/C++ acceleration | Deferred until profiling | Correctness parity and measured speed benefits behind the Python contract |
