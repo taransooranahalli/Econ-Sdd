@@ -44,3 +44,7 @@ Use the same Studio sidebar, assumptions form, result panel, local fonts and USD
 ## Workflow order and timing consistency
 
 User requested 2026-10-28: navigation order is Savings, Cash flow, Investments, Saved plans on all pages. Investment deposit timing uses the same Month end / Month start segmented buttons and pressed-state semantics as Savings, with month end initially selected. Clicks mark prior results stale; examples, imports, saved-plan reopening and clearing synchronize the selected button with the existing beginning/end input contract. Financial conventions and saved-file formats are unchanged.
+
+## Proposed Stocks and Portfolios extension
+
+Retain Investments before Saved plans and add Growth / Stocks / Portfolios subnavigation under Investments. Reuse Studio controls, surfaces, typography, keyboard states and phone stacking. Market-data pages must show actual source currency/coverage/age; they cannot reinterpret USD quotes using the hypothetical calculators currency switch. [Draft journeys and states](stock-portfolio-spec.md#2-journeys-and-studio-layout) await review.

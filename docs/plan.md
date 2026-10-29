@@ -12,6 +12,8 @@ Status: calculators complete on 2026-10-27; accounts and encrypted SQLite saved 
 | M4: Save/load/export and release review | Complete | M3 | SAV-AC-06 and all remaining criteria; JSON round-trip/version validation, CSV parity, privacy checks, full relevant suite, run instructions, and limitations |
 | M5: Savings goal | Complete | M4; approved complete-month convention | GOAL-AC-01..05; independent inverse values/minimality, dates, compatible files, API and responsive Studio UI |
 | M6: Monthly cash flow | Complete | User selected monthly income and expenses | CF-AC-01..06; exact signed totals, ratios, categories, files and request guards, navigation and responsive UI |
+| M10A: Stocks/API | Specification draft only | [Free live-preferred scope and provider capability gate](stock-portfolio-spec.md) | STK-AC-01/02; no integration claims until real access checked |
+| M10B/C: Holdings and allocation | Specification draft only | Reviewed financial/data contract; M10A | PORT-AC-01..06; independent math, encrypted definitions, Studio UI and later implementation evidence |
 | M9: Investment growth | Complete locally in 0.5.0 | User requested investments with spec-first workflow; [approved contract](investment-spec.md) | INV-AC-01..06; independent math, fees/inflation, Studio UI, files/encrypted plans, browser and regression verification before push |
 
 ## Current verification
@@ -112,3 +114,9 @@ Verification: 415 tests passed; JavaScript syntax, Python compilation and whites
 ## Pre-market-data verification — 2026-10-29
 
 Completed in 0.5.1: [verification record](verification-2026-10-29.md). Restored the stopped local app, aligned CLI/macOS startup to port 8004, fixed canonical tiny-rate exports and bounded legacy plan/file reopening, and unified package/app version metadata. 425 tests passed, plus launcher, live route/reference checks, and synthetic browser sign-in/save/reopen for all four calculator types. The record distinguishes automated/manual checks and remaining limits. Stocks, real-data APIs, portfolio construction and bank connections were not implemented.
+
+## Stock and portfolio specification — 2026-10-29
+
+Drafted [stock/portfolio contract](stock-portfolio-spec.md) and [official-source API review](market-data-api-review.md). User selected free access, preferably live, otherwise daily closes; bank linking stays deferred. Proposed Alpaca Basic/IEX live coverage is explicitly single-venue, with a whole-valuation EOD fallback and actual entitlement/display/retention gates. Draft includes manual holdings, budget/weight allocation, Decimal/bounds, freshness/partial-data states, identity/corporate actions, encrypted definitions, Studio journeys and numbered acceptance criteria.
+
+Preparation checked worked examples with exact Fraction arithmetic and independent allocation-conservation calculations. These are specification references, not implementation tests. Only documentation changed; no stock API calls, keys, provider accounts, application code, dependencies or existing calculator/account behavior changed. New financial/default/provider choices remain draft pending review.

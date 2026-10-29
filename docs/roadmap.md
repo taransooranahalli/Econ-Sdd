@@ -11,9 +11,11 @@ The project is deliberately incomplete. The current release establishes calculat
 | GitHub Pages showcase | Published | Continue refining the CI-backed SDD evidence and product previews |
 | Live Python backend | Planned | Host/budget, persistent SQL storage, TLS/proxy, secrets, backups, capacity and abuse controls |
 | Investment growth | Implemented locally in 0.5.0 | [Investment growth contract](investment-spec.md): manual total return, fees, inflation, Studio UI and encrypted plans |
-| Portfolio allocation and rebalancing | User requested later | Instruments, target weights, valuation, cash, rounding, drift and transaction-cost rules before implementation |
+| Stocks and market-data API | Specification draft; live preferred / $0 initial budget | [Stock/portfolio contract](stock-portfolio-spec.md) and [provider review](market-data-api-review.md); limited-venue live feasibility and explicit EOD fallback |
+| Portfolio creation and target allocation | Specification draft | Manual holdings, cash, optional entered basis, user-selected weights and bounded share sizing; encrypted definition saves |
+| Rebalancing existing holdings | Later contract | Transaction/cost rules, cash constraints, rounding and explicit review; no order execution |
 | Holdings and historical return analysis | User requested later | Transactions, deposits/withdrawals, total/time-weighted/money-weighted returns, distributions, corporate actions, benchmarks and data provenance |
-| Bank/account connections | Possible later; not authorized or connected | Separate consent, provider/permissions, token storage, sync/reconciliation, revocation and privacy contract before implementation |
+| Bank/account connections | Explicitly deferred by user; not connected | Separate consent, provider/permissions, token storage, sync/reconciliation, revocation and privacy contract before implementation |
 | Prediction-market analysis | Planned | Event/outcome definitions, market-implied probabilities, fees/spreads/liquidity, resolution rules, timestamps and data provenance; analysis before execution |
 | Forecasting / ML experiments | Planned, separate research track | Target/horizon, information cutoff, chronological evaluation, leakage/bias controls, baselines, uncertainty and reproducibility |
 | C/C++ acceleration | Deferred until profiling | Correctness parity and measured speed benefits behind the Python contract |

@@ -18,7 +18,8 @@ The GitHub Pages site is a static portfolio with synthetic previews and precompu
 | Sign-in and encrypted saved plans | Implemented and verified locally |
 | Public portfolio | Live GitHub Pages showcase |
 | Investment growth with fees and inflation | Implemented locally |
-| Portfolio allocation and holdings analysis | Requested for later milestones |
+| Stocks/API and portfolio creation | [Specification draft](docs/stock-portfolio-spec.md); free live preferred, EOD fallback |
+| Rebalancing and historical portfolio returns | Later milestones |
 | Prediction-market analysis | Planned |
 | Forecasting / ML and C/C++ acceleration | Separate future research; not implemented |
 

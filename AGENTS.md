@@ -71,3 +71,7 @@ The user authorized sign-in, a user database and encrypted persistent calculator
 ## Investment milestone
 
 The user selected investment growth first on 2026-10-28 after reviewing docs/investment-spec.md. Implement INV-AC-01..06 with the Studio standard and existing encrypted saved-plan library. Portfolio allocation/rebalancing and holdings/historical-return analysis are explicitly requested for later reviewed milestones; do not expand this release into market data or forecasting.
+
+## Stock/portfolio specification milestone
+
+On 2026-10-29 the user authorized specification work for stocks and portfolio creation with real API data, preserving Studio UI. Free tier is selected; live is preferred, with EOD acceptable as fallback. Bank linking is explicitly deferred. docs/stock-portfolio-spec.md and docs/market-data-api-review.md are drafts: do not treat their provider activation, financial defaults or unbuilt features as implementation approval. No credential collection, paid subscription, brokerage/trading connection or bank integration is part of specification work.

@@ -66,3 +66,7 @@ Add pure finance/investments.py and serialization/investments.py; reuse validate
 ## Local startup and release metadata — 2026-10-29
 
 The local CLI and macOS launcher default to 127.0.0.1:8004, matching the working browser URL; --port remains available for explicit alternatives. The Python process must remain running for local URLs to work; stopping it or restarting the computer requires starting it again. This is not an automatically installed background service. Account storage remains in its existing project location. Package metadata reads the version from econ_sdd.__version__ so installed and displayed release versions agree.
+
+## Proposed external market-data boundary
+
+[Draft stock/portfolio contract](stock-portfolio-spec.md) proposes a replaceable server-side provider adapter, strict HTTPS/endpoint/credential boundaries, common capture generations and pure holdings/allocation math. Existing request guards and encrypted-plan infrastructure are reused; no provider SDK or network behavior is added during specification work.

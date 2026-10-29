@@ -69,3 +69,7 @@ The user selected GitHub Pages showcase first on 2026-10-28. [Publication specif
 ## Investments specification work
 
 The user requested the investments section on 2026-10-28 using the same specification-first workflow and Studio UI. [Investment growth contract](investment-spec.md) defines the first bounded tool, explicit financial conventions and INV-AC-01..06. The user selected growth first, with portfolio allocation/rebalancing and holdings/historical returns later. Implemented locally in 0.5.0; verification and limitations are recorded in plan.md.
+
+## Stock/API and portfolio specification
+
+On 2026-10-29 the user requested [stocks and portfolio specification work](stock-portfolio-spec.md), retaining Studio styling and deferring bank linking. User-selected constraints: free tier initially, live information if feasible, daily closing prices acceptable as fallback. The draft proposes U.S./USD instruments, limited-venue live data with explicit coverage/freshness, manual holdings and allocation planning, and existing encrypted saves. [Provider comparison](market-data-api-review.md) records current official sources and unverified access/licensing gates. Implementation and provider activation await review; no account or API key has been created or connected.

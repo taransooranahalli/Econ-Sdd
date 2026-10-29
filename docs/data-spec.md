@@ -72,3 +72,7 @@ JSON raw monetary values remain strings; UI display values and CSV derive from t
 Every saved original money/rate input uses fixed-point decimal text, including very small supported rates. Exporting a valid decimal must not turn it into exponent notation that the strict input parser rejects. This applies to Savings, Goals, Investments and canonical encrypted input saves. Reopening recalculates without changing model conventions or trusting derived results.
 
 Compatibility repair for pre-0.5.1 records: after checking a supported savings/goal result or encrypted-plan model version, bounded uppercase-E annual-rate strings previously emitted by Decimal are converted to equivalent fixed-point text and then fully validated. This does not change numeric meaning or rewrite the stored plan automatically. Raw/manual scenarios still reject exponent notation; unsupported versions and out-of-range/overprecision values remain rejected.
+
+## Proposed market data and portfolio definitions
+
+[Stock/portfolio draft](stock-portfolio-spec.md) owns provider/feed identity, live/EOD labels, source/fetch timestamps, freshness, corporate-action share basis, strict definition schemas, owner-bound market access and licensed retention/export gates. Financial definitions remain separate from price observations. No provider/cache/schema change is implemented.

@@ -133,3 +133,7 @@ Currency metadata reference: [SIX ISO 4217 maintenance agency and List One](http
 ## Investment growth
 
 [INV-M01/M02](investment-spec.md) own the investment total-return, monthly fee, zero-fee counterfactual and purchasing-power formulas, bounds, rounding and independent references. Existing savings/goal math remains unchanged.
+
+## Proposed stock/portfolio math
+
+[STK-M01 and PORT-M01/M02](stock-portfolio-spec.md#4-inputs-valuation-and-accounting) draft matched-basis stock price change, manual-holdings value/weights/entered-cost gain and budget/target allocation. The draft specifies source-price precision, share rounding, cash residuals, missing data and independently checked fictional examples; it is not implemented.

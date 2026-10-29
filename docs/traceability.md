@@ -27,3 +27,7 @@ Current operational verification and tiny-rate compatibility regressions: [2026-
 ## What the history means
 
 After GitHub’s README initialization, the first application commit is a reviewed snapshot of work developed locally with its specifications. The milestone record in plan.md describes that work; it is not a fabricated sequence of earlier Git commits. Future changes can use branches, issue acceptance criteria and pull requests to make the specification-to-test progression visible.
+
+## Draft future requirements
+
+STK-AC-01/02 and PORT-AC-01..06 are defined in the [stock/portfolio draft](stock-portfolio-spec.md). Provider review and exact fictional example checks are specification evidence only. No implementation/test coverage is claimed for these future criteria.
