@@ -52,3 +52,7 @@ Retain Investments before Saved plans and add Growth / Stocks / Portfolios subna
 ## Website title — 2026-10-29
 
 User selected Finance as the website title for both the local app and GitHub Pages. All page document titles are Finance; visible desktop/mobile branding and app footer names use Finance consistently while preserving Studio styling. This presentation change does not rename repository/package identifiers or change saved-data contracts.
+
+## M10A Stocks
+
+User approved the Stocks slice on 2026-10-29. Investments now has Growth / Stocks links and a Portfolios planned label. Keep Finance branding and sidebar order. Stocks uses a listing search surface, explicit live-IEX/daily-close buttons, labeled source/time/coverage, price-only chart plus accessible daily-price table, setup state and a separate clearly fictional preview. USD source prices cannot be re-denominated. Portfolio actions remain absent until their implementation. [M10A contract](stock-portfolio-spec.md#m10a-implementation-details--2026-10-29).

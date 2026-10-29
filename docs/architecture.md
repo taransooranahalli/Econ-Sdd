@@ -34,6 +34,8 @@ Commands live in [AGENTS.md](../AGENTS.md). Implement/verify the engine first, t
 
 Keep future NumPy/SciPy, scikit-learn, TensorFlow/Keras or other evaluated libraries optional and outside this app's runtime dependencies. No ML model is implemented in this release. Define targets, horizons, prediction-time information, metrics, baselines, success criteria, chronological training/validation/untouched-test splits, walk-forward protocol where appropriate, leakage/bias/publication-delay controls, uncertainty calibration, and reproducibility records before implementation. Trading evaluation adds executable timing, costs, spreads, and slippage; forecast accuracy and trading profitability remain separate.
 
+The user requires review of the proposed prediction statistics before model implementation or training. Follow [FUT-REVIEW-01](stock-portfolio-spec.md#long-term-stock-prediction-direction--user-clarification-2026-10-29), including plain-language mathematics, evaluation design and uncertainty. Stock predictions and potential investment guidance are long-term goals; the first stock/portfolio milestone remains observational and user-directed.
+
 C/C++ may later replace a profiled numerical bottleneck behind the Python contract. First benchmark the reference; then require explicit units/dtypes, ownership/error contracts, correctness parity, precision tolerances, and representative speed measurements. Added complexity does not establish better unseen-data accuracy.
 
 ## Primary references

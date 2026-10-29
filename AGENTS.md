@@ -75,3 +75,7 @@ The user selected investment growth first on 2026-10-28 after reviewing docs/inv
 ## Stock/portfolio specification milestone
 
 On 2026-10-29 the user authorized specification work for stocks and portfolio creation with real API data, preserving Studio UI. Free tier is selected; live is preferred, with EOD acceptable as fallback. Bank linking is explicitly deferred. docs/stock-portfolio-spec.md and docs/market-data-api-review.md are drafts: do not treat their provider activation, financial defaults or unbuilt features as implementation approval. No credential collection, paid subscription, brokerage/trading connection or bank integration is part of specification work.
+
+## Stock implementation authorization — 2026-10-29
+
+The user approved implementing the Stocks slice with Alpaca free live IEX data and the existing Finance/Studio UI. Implement M10A only; holdings/allocation and predictions remain separate. Include local setup instructions because the user has no Alpaca account/keys yet. Real-provider capability verification remains pending until user configuration; synthetic tests/previews are not live verification. Keep the public Pages showcase synthetic and data access local and owner-bound. This authorization supersedes the earlier specification-only restriction for M10A.

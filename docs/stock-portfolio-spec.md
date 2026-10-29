@@ -1,6 +1,6 @@
 # Stocks and portfolios — draft specification
 
-Status: **draft for review**, 2026-10-29. The user requested this specification, the existing Studio UI, free API access with live information if feasible, daily-price fallback if needed, and bank linking deferred. This document proposes the first implementation contract; no stock/portfolio engine or provider connection has been built.
+Status: **Stocks local implementation verified synthetically; real-provider gate pending; portfolios remain draft**, 2026-10-29. The user requested this specification, the existing Studio UI, free API access with live information if feasible, daily-price fallback if needed, and bank linking deferred. The user authorized M10A using Alpaca free IEX. Real-provider capability verification awaits local account/key setup; portfolios and predictions remain later reviewed milestones.
 
 ## 1. First milestone and decisions
 
@@ -18,6 +18,22 @@ Build three bounded slices: **stock discovery and prices**, **manual holdings po
 | Other non-goals | Trade execution, brokerage account/position sync, optimizer/recommendations, options, shorts/leverage, transaction/tax-lot accounting, historical portfolio performance, forecasts/ML |
 
 An API price is an observation. A portfolio value combines observations and user-entered holdings. An allocation is an illustration under entered weights. None is a forecast, recommendation or executable order.
+
+### Long-term stock prediction direction — user clarification, 2026-10-29
+
+The user intends Finance to support stock predictions and potentially investment guidance in a later milestone. Forecasts/ML and recommendations are excluded from this first stock/portfolio release, not from the long-term product direction. No prediction method, accuracy claim or advice behavior is approved by this clarification.
+
+**FUT-REVIEW-01 — Statistics review before modeling:** Before training or implementing prediction models, present a separate experiment specification for the user's explicit review. Explain the actual mathematics in plain language with worked examples and primary references. Cover:
+
+- Prediction target (price, return, direction or risk), horizon, intended use, supported instruments and information available at the prediction time.
+- Data sources/rights, adjusted prices, dividends, delisted instruments, missing data, publication timing and selection/survivorship bias.
+- Proposed statistics, estimators, features, assumptions, candidate models and simple comparison baselines; explain why each is relevant. TensorFlow or more complex models are candidates, not evidence of improved accuracy.
+- Chronological training/validation and untouched final test periods, walk-forward evaluation where appropriate, leakage controls and a record of model/parameter searches. Preserve final-test independence after results are inspected.
+- Target-appropriate error/probability metrics, uncertainty and interval calibration/coverage, sample sizes, dependence-aware statistical comparisons and predeclared success/failure criteria.
+- Separate forecast quality from investment usefulness. Any strategy evaluation specifies executable timing, fees, spreads, slippage, turnover and drawdowns alongside benchmark comparisons.
+- Reproducible dataset/model versions, experiment parameters/seeds, failed experiments, limitations and conditions for withholding unreliable outputs.
+
+Forecast outputs are estimates conditional on data and assumptions. Uncertainty disclosures must not suggest that proprietary mathematics or a disclaimer eliminates legal responsibility. The intended audience, personalization, compensation, jurisdiction and actual functionality of any future public investment-guidance feature require a separate assessment before release; no regulatory status or blanket liability waiver is asserted here. See the SEC's [automated-adviser guidance](https://www.sec.gov/newsroom/press-releases/2017-52) and [fiduciary interpretation, pp. 9–11](https://www.sec.gov/files/rules/interp/2019/ia-5248.pdf). This is a product boundary, not a determination that this application is an investment adviser.
 
 ## 2. Journeys and Studio layout
 
@@ -176,4 +192,22 @@ Proposed traffic policy: ≤60 provider requests/minute for the instance, or the
 | M10C | Budget/target allocation planner | PORT-AC-02/05/06; independent conservation/rounding and full release verification |
 | Later | Transaction/return history, rebalancing, international FX, optional bank connectivity | Separate approved definitions, provider/privacy/cost contracts and migration as applicable |
 
-Before implementation, confirm the proposed USD/U.S. scope, limited-venue live label, manual holdings plus allocation scope, and provider account/rights/capabilities. New costs, public data display and bank/trading access require separate authorization. The user's $0/live-preferred choices are settled; provider activation and all unbuilt behaviors remain reviewable proposals.
+M10A implementation is authorized for the U.S./USD Stocks view with explicit IEX coverage. Before completing its real-provider gate, verify actual account access/rights/capabilities. Before portfolio implementation, review its manual holdings/allocation conventions. New costs, public data display and bank/trading access require separate authorization. The user's $0/live-preferred choices are settled; provider activation and all unbuilt behaviors remain reviewable proposals.
+
+## M10A implementation details — 2026-10-29
+
+Authorized scope is Stocks: explicit search, listing resolution, latest eligible IEX trade, completed daily IEX close fallback and split-adjusted daily history (1/3/12 month ranges). One selected instrument is active at a time. Portfolio creation controls arrive in M10B, rather than presenting an inactive Add button. No paid/SIP feed is requested. The user has no provider account yet; setup and synthetic verification proceed while authenticated live verification stays pending.
+
+- Transport is fixed-host HTTPS GET only: data.alpaca.markets/v2/stocks/trades/latest and /v2/stocks/bars; paper-api.alpaca.markets/v2/assets and /v2/calendar (read-only session metadata). The calendar addition does not allow orders, balances, positions, clock/account or arbitrary paths. Pin the legacy v2 calendar contract reviewed against official documentation on 2026-10-29; do not extrapolate beyond its documented coverage through 2029. Validate timezone conversion, early closes, holidays and DST; unknown calendars fail unavailable.
+- Setup is an interactive local CLI with hidden key entry, binding the profile to an existing account's stable UUID. Store only in an ignored 0600 profile under the private key directory; no browser credential form. User confirms personal display access under their provider agreement. Authentication, process CSRF and account CSRF are required before provider calls.
+- Provider asset metadata establishes us_equity class, listing venue, active status and stable ID. It does not reliably distinguish common stock from ETF/other equity subtypes: display that gap rather than invent a classification. Only reviewed listing venues are accepted, and option/crypto/OTC classes are excluded; finer subtype screening is pending the real catalog check.
+- Prices use explicit feed=iex and currency=USD. History uses adjustment=split, is labeled price-only, and excludes current/incomplete sessions. Daily-close mode uses raw bars. No day-change percentage is shown until a comparable prior-close share basis is established; its unavailable reason remains visible. No stored/derived total-return claim.
+- The latest complete history endpoint window ends at the previous New York midnight. The daily-close view uses the latest completed session that has crossed that boundary, so same-day close publication is intentionally pending until the next New York day; it never guesses a publication SLA. A missing required session close remains missing, with older chart points available for inspection.
+- A single server lock coalesces cached calls across tabs; cache lifetimes are 10s latest trade, 30m completed history, 24h catalog and 1h calendar. All cached copies stay in memory; restart clears them. Cache timestamps retain original retrieval age. Server limits to 60 requests/minute, honors bounded Retry-After, and suppresses automatic retries on invalid/forbidden credentials. The browser coordinates polling leadership across same-origin tabs where Web Locks is available; the server remains authoritative when unavailable. Network errors stop automatic polling and require a deliberate retry; no stale value is relabeled live.
+- No provider responses, chart snapshots or live-price exports are written to disk. The built-in DEMO-A example is fictional, requires no keys/account/network and always carries a synthetic label. It cannot be submitted as a real provider instrument. Account save/export controls for stock observations are omitted until their contracts/rights are established.
+
+Real-provider STK-AC-01 remains an incomplete release capability check until keys, representative stock/ETF coverage, timestamp behavior, limits and display permission are verified. The app must remain useful with a clear setup state and no fabricated live result.
+
+Primary implementation references: [latest trades](https://docs.alpaca.markets/us/reference/stocklatesttrades-1), [bars](https://docs.alpaca.markets/us/reference/stockbars), [assets](https://docs.alpaca.markets/us/reference/get-v2-assets-1), [v2 calendar](https://docs.alpaca.markets/us/reference/legacycalendar).
+
+M10A implementation and synthetic verification results are recorded in [the verification report](stocks-verification-2026-10-29.md). Actual provider verification is pending [local setup](alpaca-setup.md).

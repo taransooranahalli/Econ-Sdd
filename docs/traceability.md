@@ -30,4 +30,13 @@ After GitHub’s README initialization, the first application commit is a review
 
 ## Draft future requirements
 
-STK-AC-01/02 and PORT-AC-01..06 are defined in the [stock/portfolio draft](stock-portfolio-spec.md). Provider review and exact fictional example checks are specification evidence only. No implementation/test coverage is claimed for these future criteria.
+STK-AC-01/02 and PORT-AC-01..06 are defined in the [stock/portfolio contract](stock-portfolio-spec.md). M10A implements the Stocks slice; portfolios remain future work.
+
+| Requirement | Implementation | Evidence / limits |
+| --- | --- | --- |
+| STK-AC-01: provider boundary | [Fixed-host read-only transport](../src/econ_sdd/market/alpaca.py), [private setup](../src/econ_sdd/market/__main__.py) | [Transport security tests](../tests/unit/test_alpaca_transport.py), [temporary setup tests](../tests/unit/test_market_setup.py); **real account/feed/display capability verification pending** |
+| STK-AC-02: identity, prices, sessions, errors | [Normalizers](../src/econ_sdd/market/models.py), [service/cache](../src/econ_sdd/market/service.py) | [Synthetic boundary/calendar/cache tests](../tests/unit/test_market.py); no actual-provider result claimed |
+| STK account/CSRF/owner isolation | [Market routes](../src/econ_sdd/market_api.py) | [Owner, request guard and end-to-end fixture API tests](../tests/integration/test_market_api.py) |
+| M10A Studio and setup states | [Stocks page](../src/econ_sdd/static/stocks.html), [rendering](../src/econ_sdd/static/stocks.js) | Desktop/phone, keyboard and synthetic sign-in/search/daily-close browser review; [verification record](stocks-verification-2026-10-29.md) |
+
+PORT-AC-01..06 have specification/example evidence only; no holdings/allocation implementation is claimed.

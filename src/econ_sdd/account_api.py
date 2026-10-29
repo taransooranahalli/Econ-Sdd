@@ -164,3 +164,5 @@ def install_account_routes(app,store: AccountStore|None,csrf_token: str,payload,
         if error is not None:return error
         fields(data,{'revision'});await run_in_threadpool(store.delete_plan,session,plan_id,data['revision'])
         return {'deleted':True}
+
+    return session_for

@@ -15,6 +15,8 @@ Econ-Sdd/
 │   ├── security.py            AES-GCM envelopes and private keyring files
 │   ├── accounts.py            SQLite schema, credentials, sessions, plan CRUD
 │   ├── account_api.py         Account routes and owner-scoped saved plans
+│   ├── market/                Alpaca GET transport, validation, cache and local setup
+│   ├── market_api.py          Session/CSRF guarded Stocks APIs
 │   ├── web.py                 App factory, request guards and calculator API
 │   ├── __main__.py            Loopback launcher
 │   └── static/                Studio pages, scripts, styles and local fonts
@@ -23,6 +25,7 @@ Econ-Sdd/
 ├── docs/                      Product, math, data and security specifications
 ├── data/accounts.sqlite3      Local account database; excluded from Git
 ├── .secrets/keyring.json      Private keys; excluded from Git and editor search
+├── .secrets/alpaca.json       Optional owner-bound provider profile; excluded from Git
 ├── requirements.lock          Exact installed dependency versions
 └── pyproject.toml             Package metadata and runtime dependencies
 ```
@@ -48,3 +51,5 @@ The schema is defined in `AccountStore.initialize` in `src/econ_sdd/accounts.py`
 Keys are outside SQLite. Passwords are hashed, not decrypted. IDs, owner links, timestamps and hashes remain visible database metadata. This is server-managed encryption: the app can decrypt saved plans during authorized use.
 
 Start with `docs/account-spec.md` for the security contract and `docs/plan.md` for verified checks and limitations. Hosting and production key/backup configuration remain separate work.
+
+Stocks reads follow a separate path: signed-in owner + both CSRF tokens → bounded request validation → owner-bound market service → fixed-host HTTPS GET → normalized observations and Python-formatted prices → Studio rendering. Temporary source caches contain no portfolio inputs. [Setup and limits](alpaca-setup.md).

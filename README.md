@@ -4,11 +4,11 @@
 
 [Portfolio showcase](https://taransooranahalli.github.io/Econ-Sdd/) · [Requirements → code → tests](docs/traceability.md) · [Roadmap](docs/roadmap.md) · [Architecture](docs/architecture.md)
 
-A private local app for savings, goals, monthly cash flow, investment growth and encrypted saved plans with the approved Studio UI: dark surfaces, Poppins typography, and purple accents inspired by taran.work. Financial results are computed in Python with Decimal arithmetic; the browser renders the results.
+Finance is a private local app for savings, goals, monthly cash flow, investment growth, stocks and encrypted saved plans with the approved Studio UI: dark surfaces, Poppins typography, and purple accents inspired by taran.work. Financial results are computed in Python with Decimal arithmetic; the browser renders the results.
 
 ## What this project demonstrates
 
-Econ starts with reviewable contracts: explicit units and assumptions, numbered acceptance criteria, independent numerical references, separate calculation/UI/storage boundaries, and verification recorded against each milestone. [Trace one requirement through its implementation and tests](docs/traceability.md).
+Finance starts with reviewable contracts: explicit units and assumptions, numbered acceptance criteria, independent numerical references, separate calculation/UI/storage boundaries, and verification recorded against each milestone. [Trace one requirement through its implementation and tests](docs/traceability.md).
 
 The GitHub Pages site is a static portfolio with synthetic previews and precomputed examples. The full FastAPI application runs locally; Pages does not host its Python calculations, sign-in or SQLite data. [Publishing and backend-hosting boundary](docs/deployment.md).
 
@@ -18,7 +18,8 @@ The GitHub Pages site is a static portfolio with synthetic previews and precompu
 | Sign-in and encrypted saved plans | Implemented and verified locally |
 | Public portfolio | Live GitHub Pages showcase |
 | Investment growth with fees and inflation | Implemented locally |
-| Stocks/API and portfolio creation | [Specification draft](docs/stock-portfolio-spec.md); free live preferred, EOD fallback |
+| Stocks / Alpaca IEX | Local workspace and read-only adapter implemented; [personal setup](docs/alpaca-setup.md); real-account capability verification pending |
+| Portfolio creation and allocation | [Specification draft](docs/stock-portfolio-spec.md); next implementation slice |
 | Rebalancing and historical portfolio returns | Later milestones |
 | Prediction-market analysis | Planned |
 | Forecasting / ML and C/C++ acceleration | Separate future research; not implemented |
@@ -80,6 +81,14 @@ Python projects the nominal balance, signed net gain, contributions, fees deduct
 The labeled synthetic example ($10,000 initially, $250 at each month end, 5% annual effective return, 0.5% annual nominal fee, 2% inflation, 120 months) gives **$53,067.70 nominal ending value**, **$1,495.46 deducted fees**, **$1,812.04 fee impact** and **$43,534.00 start-period purchasing power**. It is a conditional illustration, not a market forecast or recommendation. Negative returns and losses are supported. No prices or financial accounts are connected.
 
 Inspect the monthly chart/schedule, save/reimport JSON, export CSV or explicitly save the validated inputs to your encrypted local account. Reopening always recalculates. [INV-M01/M02 and acceptance criteria](docs/investment-spec.md) define the model. Allocation/rebalancing and holdings/historical returns are later, separately specified milestones.
+
+## Stocks and Alpaca IEX
+
+Open **Investments → Stocks**, or http://127.0.0.1:8004/stocks. **Try synthetic example** shows a clearly fictional instrument and price path without account/provider access. Real search, source/timestamp labels, latest eligible IEX trades, completed daily closes and split-adjusted daily price history are implemented behind a signed-in, owner-bound local profile. Prices are USD; no FX conversion, trading, portfolio construction or prediction model is included in this slice.
+
+[Set up your own Alpaca paper keys locally](docs/alpaca-setup.md). Keys are entered with hidden input in your terminal and kept outside Git/browser code. The free IEX feed covers one exchange, with a 15-second screen refresh during supported regular sessions. Stale/no-trade/closed/error states stay visible. Daily close excludes current-day bars, and chart prices exclude dividend income. Day change is unavailable until its comparable share basis is verified.
+
+**Real Alpaca access is not yet verified:** the user has no provider account/keys configured. Synthetic transport/API/browser checks establish application behavior, not provider entitlement or live-feed accuracy. GitHub Pages remains a static showcase; it does not run this data connection or retain personal market data. See the [M10A contract](docs/stock-portfolio-spec.md#m10a-implementation-details--2026-10-29).
 
 ## Accounts and saved plans
 

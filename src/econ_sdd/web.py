@@ -14,6 +14,8 @@ from . import __version__
 from .accounts import AccountStore,AccountError,default_paths
 from .security import Keyring,VaultError
 from .account_api import install_account_routes
+from .market.service import MarketService
+from .market_api import install_market_routes
 from .finance.currencies import CURRENCIES, DEFAULT_CURRENCY
 from .finance.cash_flow import CASH_FLOW_MODEL_VERSION, CashFlowBudget, calculate_cash_flow
 from .finance.goals import GOAL_MODEL_VERSION, SavingsGoal, solve_goal
@@ -30,7 +32,7 @@ from .serialization.investments import (scenario_from_record, investment_record,
 STATIC = Path(__file__).parent / "static"
 
 
-def create_app(*,account_store: AccountStore|None=None,public_origin: str|None=None) -> FastAPI:
+def create_app(*,account_store: AccountStore|None=None,public_origin: str|None=None,market_service: MarketService|None=None) -> FastAPI:
     if public_origin:
         origin_parts=urlsplit(public_origin)
         if (origin_parts.scheme!='https' or not origin_parts.hostname or origin_parts.username or origin_parts.password
@@ -208,7 +210,9 @@ def create_app(*,account_store: AccountStore|None=None,public_origin: str|None=N
         return Response(body, media_type="application/json" if kind == "json" else "text/csv",
                         headers={"Content-Disposition": f'attachment; filename="{"econ-goal" if isinstance(inputs, SavingsGoal) else "econ-savings"}-{inputs.currency}.{kind}"'})
 
-    install_account_routes(app,account_store,csrf_token,payload,STATIC,secure=bool(public_origin))
+    session_for=install_account_routes(app,account_store,csrf_token,payload,STATIC,secure=bool(public_origin))
+    app.state.market_service=market_service or MarketService()
+    install_market_routes(app,app.state.market_service,session_for,payload,STATIC,csrf_token)
     app.mount("/static", StaticFiles(directory=STATIC), name="static")
     return app
 
@@ -217,4 +221,7 @@ def create_local_app() -> FastAPI:
     import os
     database,key_file=default_paths()
     if not database.exists():raise VaultError('Initialize accounts first: python -m econ_sdd.accounts init')
-    return create_app(account_store=AccountStore(database,Keyring.load(key_file)),public_origin=os.environ.get('ECON_PUBLIC_ORIGIN'))
+    from .market.config import load_profile
+    profile,setup_error=load_profile()
+    return create_app(account_store=AccountStore(database,Keyring.load(key_file)),public_origin=os.environ.get('ECON_PUBLIC_ORIGIN'),
+                      market_service=MarketService(profile,setup_error=setup_error))

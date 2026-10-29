@@ -76,3 +76,7 @@ Compatibility repair for pre-0.5.1 records: after checking a supported savings/g
 ## Proposed market data and portfolio definitions
 
 [Stock/portfolio draft](stock-portfolio-spec.md) owns provider/feed identity, live/EOD labels, source/fetch timestamps, freshness, corporate-action share basis, strict definition schemas, owner-bound market access and licensed retention/export gates. Financial definitions remain separate from price observations. No provider/cache/schema change is implemented.
+
+## M10A stock observations
+
+[Stocks contract](stock-portfolio-spec.md#m10a-implementation-details--2026-10-29) defines stable provider identity, Decimal-string prices, source/feed/currency, event versus bar timestamps, retrieval age, session calendar, missing-data states and memory-cache limits. Provider profile is a private mode-0600 local file bound to an existing account UUID; no browser/import credentials are accepted. Observations are temporary and are not saved to SQL, exported or displayed publicly. Existing encrypted calculator records and schemas are unchanged. [Setup](alpaca-setup.md).

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="csrf-token" content="__CSRF_TOKEN__">
+<title>Finance</title>
+<link rel="stylesheet" href="/static/styles.css">
+<script src="/static/stocks.js" defer></script>
+<script src="/static/account.js" defer></script>
+</head>
+<body>
+<div id="econ-savings-usd"><div id="ec-studio" class="ec-stage"><div class="ec-shell">
+<aside class="ec-sidebar">
+  <div class="ec-brand"><span class="ec-brand-letter">F</span>inance<span class="ec-brand-period">.</span></div>
+  <div class="ec-brand-note">Personal finance. Your way.</div>
+  <div class="ec-nav-caption">Your workspace</div>
+  <nav aria-label="Application navigation"><a class="ec-nav-item" href="/">Savings</a><a class="ec-nav-item" href="/cash-flow">Cash flow</a><a class="ec-nav-item ec-active" href="/investments" aria-current="page">Investments</a><a class="ec-nav-item" href="/plans">Saved plans</a></nav>
+  <div class="ec-nav-footer">Personal workspace<br>Runs on your computer</div>
+</aside>
+<div class="ec-workspace">
+<header class="ec-topbar"><div class="ec-mobile-brand">Finance.</div><div class="ec-breadcrumb">Workspace <span>/</span> Calculators <span>/</span> <strong>Stocks</strong></div><div class="ec-top-actions"><a class="ec-account-link" id="account-link" href="/account">Sign in</a><button id="account-logout" type="button" class="ec-example" hidden>Sign out</button><span class="ec-badge">Local workspace</span><span class="ec-badge" title="Source prices are USD; currency conversion is not supported yet.">USD prices</span></div></header>
+<main class="ec-main">
+<nav class="ec-calculator-nav" aria-label="Mobile calculator navigation"><a href="/">Savings</a><a href="/cash-flow">Cash flow</a><a href="/investments" aria-current="page">Investments</a><a href="/plans">Saved plans</a></nav>
+<p id="account-notice" class="ec-file-note" role="status" hidden></p>
+
+<header class="ec-header"><div><p class="ec-eyebrow">A closer look at the market</p><h1>Explore <span class="ec-title-accent">stocks.</span></h1><p class="ec-subtitle">Find a listing. Inspect its price, source and history.</p></div><div class="ec-header-actions"><button class="ec-quiet-button" id="stock-example" type="button" disabled>Try synthetic example</button></div></header>
+<nav class="ec-investment-nav" aria-label="Investment tools"><a href="/investments">Growth</a><a href="/stocks" aria-current="page">Stocks</a><span class="ec-helper">Portfolios · planned</span></nav>
+<section class="ec-market-notice" aria-label="Market data connection"><div><span class="ec-small-tag" id="connection-badge">Checking setup</span><p id="connection-message" role="status">Checking your local market-data configuration…</p></div><a class="ec-quiet-button" href="#alpaca-setup">Setup instructions ↘</a></section>
+<div class="ec-layout ec-stock-layout">
+<section class="ec-surface ec-form ec-stock-discovery" aria-label="Stock discovery"><div class="ec-section-heading"><h2>Find an instrument</h2><span class="ec-small-tag">U.S. equities</span></div>
+<form id="stock-search-form" novalidate><label class="ec-field" for="stock-query"><span class="ec-label">Ticker or company</span><span class="ec-input-wrap"><input id="stock-query" type="search" placeholder="e.g. AAPL or Apple" maxlength="60" autocomplete="off" aria-describedby="search-help search-error"></span></label><p id="search-help" class="ec-helper">Search supported U.S. listings. Choose a result to resolve its identity.</p><button class="ec-primary" id="stock-search" type="submit" disabled>Search Alpaca</button><p id="search-error" class="ec-error" role="alert" hidden></p></form>
+<p id="search-status" class="ec-helper" role="status">Results will appear here.</p><div id="stock-results" class="ec-stock-search-results"></div>
+<div class="ec-stock-scope"><h3>Source matters.</h3><p class="ec-helper">Free IEX trades cover one exchange. An older IEX trade does not mean a stock stopped trading elsewhere.</p><p class="ec-helper">All source prices are USD. Currency conversion is not supported yet.</p></div></section>
+<div class="ec-results-column"><section class="ec-surface ec-result ec-stock-detail" aria-label="Stock details" aria-busy="false">
+<div id="stock-empty" class="ec-empty"><span class="ec-empty-mark" aria-hidden="true">↗</span><h2>Start with a stock.</h2><p>Search for a ticker after setup, or try a fictional example to explore this workspace.</p><span class="ec-badge">Read-only market observations</span></div>
+<div id="stock-content" hidden><div class="ec-stock-title-row"><div><p class="ec-eyebrow" id="stock-symbol"></p><h2 id="stock-name"></h2><p class="ec-helper" id="stock-listing"></p></div><button id="stock-refresh" class="ec-quiet-button" type="button">Refresh price</button></div>
+<div class="ec-segment ec-market-mode" role="group" aria-label="Price source mode"><button type="button" data-price-mode="live" aria-pressed="true">Live IEX</button><button type="button" data-price-mode="daily" aria-pressed="false">Daily close</button></div>
+<p id="stock-feedback" class="ec-pending" role="status" hidden></p><p id="stock-detail-error" class="ec-error" role="alert" hidden></p>
+<p id="stock-price-label" class="ec-projection-heading"></p><div class="ec-stock-price-line"><strong id="stock-price" class="ec-total"></strong><span class="ec-badge">USD</span></div><p id="stock-price-status" class="ec-result-note" role="status"></p>
+<dl class="ec-stock-times"><div><dt>Observation</dt><dd id="stock-observed"></dd></div><div><dt>Retrieved</dt><dd id="stock-retrieved"></dd></div><div><dt>Coverage</dt><dd id="stock-coverage"></dd></div></dl>
+<p class="ec-helper" id="stock-change"></p>
+<div class="ec-stock-chart-heading"><h3>Price history</h3><div class="ec-segment" role="group" aria-label="History range"><button type="button" data-days="30" aria-pressed="true">30D</button><button type="button" data-days="90" aria-pressed="false">90D</button><button type="button" data-days="365" aria-pressed="false">1Y</button></div></div>
+<div id="stock-chart" class="ec-stock-chart"></div><p id="stock-history-note" class="ec-helper"></p><details class="ec-metadata"><summary>Daily prices & data details</summary><p id="stock-history-metadata" class="ec-helper"></p><div class="ec-table-wrap"><table aria-label="Daily stock price history"><thead><tr><th scope="col">Session date</th><th scope="col">Close · USD</th></tr></thead><tbody id="stock-history-rows"></tbody></table></div></details>
+</div></section>
+<section class="ec-assumptions" aria-label="Stock data assumptions"><h3>Context, in plain sight</h3><div class="ec-assumption-items"><span>IEX coverage only</span><span>USD source prices</span><span>Price history ≠ total return</span><span>Observations, not forecasts</span></div><p class="ec-helper">Prices are indicative observations. No orders are placed. Portfolio creation and prediction models will follow in separate milestones.</p></section>
+</div></div>
+<section class="ec-surface ec-stock-setup" id="alpaca-setup" aria-labelledby="setup-heading"><p class="ec-eyebrow">Connect your personal data source</p><h2 id="setup-heading">Set up Alpaca locally.</h2><p class="ec-helper">Create an Alpaca account with paper access and review its current free Basic data terms. This app uses the IEX feed. There is no paid upgrade, funding step or trading connection in Finance.</p><ol><li>Create your local Finance account using <a href="/account">Sign in</a>.</li><li>In Alpaca, generate your <strong>paper API key and secret</strong>. Keep them private.</li><li>In a local terminal, open this project and run the setup command below with your Finance username. The command prompts for keys with hidden input and saves an owner-bound private profile.</li><li>Restart Finance, sign in, then return to Stocks and search. First access verifies your actual permissions; setup alone does not prove live access.</li></ol><pre><code>cd /Users/saint/Econ-Sdd
+.venv/bin/python -m econ_sdd.market setup --username YOUR_FINANCE_USERNAME</code></pre><p class="ec-helper">Never paste keys into chat, GitHub, browser code or a public deployment. Stock prices stay in temporary server memory. See <a href="https://docs.alpaca.markets/us/docs/about-market-data-api" target="_blank" rel="noopener noreferrer">Alpaca’s market-data documentation ↗</a> for current account access and feed limits. Public redistribution requires a separate review.</p></section>
+<footer class="ec-footer"><span>Personal research workspace · read-only market data</span><span>Finance · Stocks</span></footer>
+</main></div></div></div></div><noscript>Stock search requires JavaScript and the local Python server. API keys never belong in this page.</noscript></body></html>

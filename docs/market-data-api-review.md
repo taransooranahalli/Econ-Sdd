@@ -31,3 +31,7 @@ The Massive pricing page rendered incompletely in the research browser; the prov
 - Verify local display, temporary caching, normalized snapshot retention and personal export permissions against the actual account's current agreements. Public display/redistribution is a separate gate; the [terms](https://files.alpaca.markets/disclosures/library/TermsAndConditions.pdf) describe personal/non-commercial content use. This research is not a license grant.
 
 If a capability or right cannot be established, expose it as unavailable and use the approved free EOD alternative where possible. Do not pay, scrape substitute prices, silently switch feeds or infer zero from an empty response.
+
+## Implementation status — 2026-10-29
+
+The user approved M10A with Alpaca free IEX. [Local adapter/UI and synthetic verification](stocks-verification-2026-10-29.md) are implemented. The user has no Alpaca account/keys yet; this does not complete the real capability, catalog subtype, timestamp/entitlement or display-rights checks above. [User-operated setup](alpaca-setup.md) is provided. No paid or public live-data activation occurred.
