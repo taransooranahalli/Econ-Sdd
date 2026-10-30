@@ -63,7 +63,7 @@ def instrument(value):
     symbol, name = value.get('symbol'), value.get('name')
     if not isinstance(symbol, str) or not SYMBOL.fullmatch(symbol):
         return None
-    if not isinstance(name, str) or not 1 <= len(name) <= 200 or any(ord(c) < 32 for c in name):
+    if not isinstance(name, str) or not 1 <= len(name) <= 512 or any(ord(c) < 32 for c in name):
         raise malformed()
     try:
         identity = str(UUID(value['id']))

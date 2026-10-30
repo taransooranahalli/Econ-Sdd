@@ -266,3 +266,17 @@ def test_active_instrument_limit_precedes_price_calls():
     with pytest.raises(MarketError) as caught:market.detail(OWNER,ASSET_ID)
     assert caught.value.code=='active_limit'
     assert [e for e,_ in transport.calls]==['assets']
+
+
+def test_long_plain_text_instrument_name_does_not_block_unrelated_stock_search():
+    market,transport,_=service()
+    long_name='Fictional preferred security '+('X'*200)
+    assert len(long_name)==229
+    transport.catalog=[ASSET,{**ASSET,'id':'33333333-3333-4333-8333-333333333333','symbol':'LONG.PRA','name':long_name}]
+    assert market.search(OWNER,'DEMO')['instruments'][0]['id']==ASSET_ID
+    assert market.search(OWNER,'LONG.PRA')['instruments'][0]['name']==long_name
+
+
+@pytest.mark.parametrize('name',['X'*513,'Company\nName'])
+def test_provider_name_bound_and_control_characters_stay_guarded(name):
+    with pytest.raises(MarketError):instrument({**ASSET,'name':name})

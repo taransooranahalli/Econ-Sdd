@@ -31,3 +31,5 @@ Provider requests reveal selected symbols, request timing and the server IP. The
 - **Day change unavailable:** a verified comparable previous-close share basis is not established yet. It is never manufactured from incompatible prices.
 
 If Alpaca rejects access, check paper keys/permissions locally and restart Finance. A 429 response pauses requests; respect its wait time. No automatic paid fallback occurs. Real-provider verification is pending until the user completes setup; passing synthetic tests does not establish real-feed access, complete instrument subtype coverage or redistribution rights. Public GitHub Pages stays a synthetic project showcase. Prediction statistics and any future public investment-guidance feature require their own review.
+
+Project verification update: the configured owner completed an after-hours AAPL/SPY endpoint check on 2026-10-29. [Results and remaining limits](stocks-verification-2026-10-29.md). Other installations/accounts still need their own setup; open-session freshness has not yet been verified.

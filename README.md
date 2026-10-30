@@ -18,7 +18,7 @@ The GitHub Pages site is a static portfolio with synthetic previews and precompu
 | Sign-in and encrypted saved plans | Implemented and verified locally |
 | Public portfolio | Live GitHub Pages showcase |
 | Investment growth with fees and inflation | Implemented locally |
-| Stocks / Alpaca IEX | Local workspace and read-only adapter implemented; [personal setup](docs/alpaca-setup.md); real-account capability verification pending |
+| Stocks / Alpaca IEX | Local workspace and adapter; stock/ETF endpoint access checked after hours; open-session freshness verification pending; [personal setup](docs/alpaca-setup.md) |
 | Portfolio creation and allocation | [Specification draft](docs/stock-portfolio-spec.md); next implementation slice |
 | Rebalancing and historical portfolio returns | Later milestones |
 | Prediction-market analysis | Planned |
@@ -88,7 +88,7 @@ Open **Investments → Stocks**, or http://127.0.0.1:8004/stocks. **Try syntheti
 
 [Set up your own Alpaca paper keys locally](docs/alpaca-setup.md). Keys are entered with hidden input in your terminal and kept outside Git/browser code. The free IEX feed covers one exchange, with a 15-second screen refresh during supported regular sessions. Stale/no-trade/closed/error states stay visible. Daily close excludes current-day bars, and chart prices exclude dividend income. Day change is unavailable until its comparable share basis is verified.
 
-**Real Alpaca access is not yet verified:** the user has no provider account/keys configured. Synthetic transport/API/browser checks establish application behavior, not provider entitlement or live-feed accuracy. GitHub Pages remains a static showcase; it does not run this data connection or retain personal market data. See the [M10A contract](docs/stock-portfolio-spec.md#m10a-implementation-details--2026-10-29).
+**Real-account endpoint access was checked after hours on 2026-10-29:** stock/ETF search, IEX latest trades, daily closes and history worked after personal setup. Open-session freshness/polling and broader provider capability checks remain pending; [verification scope](docs/stocks-verification-2026-10-29.md) distinguishes them from synthetic tests. GitHub Pages remains a static showcase; it does not run this data connection or retain personal market data. See the [M10A contract](docs/stock-portfolio-spec.md#m10a-implementation-details--2026-10-29).
 
 ## Accounts and saved plans
 

@@ -124,3 +124,7 @@ Preparation checked worked examples with exact Fraction arithmetic and independe
 ## M10A Stocks implementation — 2026-10-29
 
 The user authorized Alpaca free live IEX Stocks with the accepted Finance UI; portfolios/predictions remain later. Local Stocks UI, read-only adapter, authenticated owner profile, setup command, source/freshness/calendar/history states and fictional preview are implemented in 0.6.0. **506 tests pass** plus syntax/dependency/build checks and desktop/phone/synthetic account browser review. [Verification and limits](stocks-verification-2026-10-29.md). STK-AC-01 remains pending actual account/key setup and live capability/display checks; the user has no Alpaca account yet. No real-provider result is claimed. [Personal setup](alpaca-setup.md).
+
+## Real Alpaca access follow-up — 2026-10-29
+
+User configured paper keys and authorized verification. Restarted the local app, corrected a long provider-name compatibility bound with fictional regressions, and passed **509 tests**. Real authenticated AAPL/SPY search, IEX latest-trade access, daily-close mode and history worked after hours; open-session freshness/polling and broader licensing/capability checks remain pending. [Evidence and exact limits](stocks-verification-2026-10-29.md#follow-up-real-account-endpoint-smoke-check--2026-10-29-evening-americachicago). No raw responses, credentials or live prices are committed/published.

@@ -211,3 +211,7 @@ Real-provider STK-AC-01 remains an incomplete release capability check until key
 Primary implementation references: [latest trades](https://docs.alpaca.markets/us/reference/stocklatesttrades-1), [bars](https://docs.alpaca.markets/us/reference/stockbars), [assets](https://docs.alpaca.markets/us/reference/get-v2-assets-1), [v2 calendar](https://docs.alpaca.markets/us/reference/legacycalendar).
 
 M10A implementation and synthetic verification results are recorded in [the verification report](stocks-verification-2026-10-29.md). Actual provider verification is pending [local setup](alpaca-setup.md).
+
+## Real-account verification follow-up — 2026-10-29
+
+The user saved paper keys and authorized restart plus real data checks. The first catalog request succeeded, but a valid 229-character provider instrument name exceeded the prototype's 200-character metadata bound and blocked all search. Accept complete plain-text provider names up to 512 characters without truncation, preserving control-character and stable-identity checks. Regression fixtures remain fictional; no retained provider payload or private profile enters tests/source. The account/feed smoke check continues after this compatibility correction; a closed-market result does not establish open-session freshness or polling behavior.
