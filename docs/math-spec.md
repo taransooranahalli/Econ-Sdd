@@ -137,3 +137,7 @@ Currency metadata reference: [SIX ISO 4217 maintenance agency and List One](http
 ## Proposed stock/portfolio math
 
 [STK-M01 and PORT-M01/M02](stock-portfolio-spec.md#4-inputs-valuation-and-accounting) draft matched-basis stock price change, manual-holdings value/weights/entered-cost gain and budget/target allocation. The draft specifies source-price precision, share rounding, cash residuals, missing data and independently checked fictional examples; it is not implemented.
+
+## PORT-M01: manual holdings valuation
+
+The authoritative equations, conventions, rounding and independent $2,000 reference are in the [stock/portfolio contract](stock-portfolio-spec.md#port-m01-holdings-value). The pure implementation is `finance/portfolios.py`; values use unrounded raw share-basis-matched USD prices, weights include cash, missing data withholds a complete total, and entered-cost gains are distinct from investment return. [Independent checks and limitations](portfolio-verification-2026-10-29.md). Allocation math is not implemented in this milestone.

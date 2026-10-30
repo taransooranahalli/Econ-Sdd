@@ -19,7 +19,8 @@ The GitHub Pages site is a static portfolio with synthetic previews and precompu
 | Public portfolio | Live GitHub Pages showcase |
 | Investment growth with fees and inflation | Implemented locally |
 | Stocks / Alpaca IEX | Local workspace and adapter; stock/ETF endpoint access checked after hours; open-session freshness verification pending; [personal setup](docs/alpaca-setup.md) |
-| Portfolio creation and allocation | [Specification draft](docs/stock-portfolio-spec.md); next implementation slice |
+| Manual holdings portfolios | Implemented locally in 0.7.0: Alpaca values, weights, optional entered-cost gains and encrypted definitions; [verification](docs/portfolio-verification-2026-10-29.md) |
+| Budget/target allocation | Next separate implementation slice |
 | Rebalancing and historical portfolio returns | Later milestones |
 | Prediction-market analysis | Planned |
 | Forecasting / ML and C/C++ acceleration | Separate future research; not implemented |
@@ -84,11 +85,19 @@ Inspect the monthly chart/schedule, save/reimport JSON, export CSV or explicitly
 
 ## Stocks and Alpaca IEX
 
-Open **Investments → Stocks**, or http://127.0.0.1:8004/stocks. **Try synthetic example** shows a clearly fictional instrument and price path without account/provider access. Real search, source/timestamp labels, latest eligible IEX trades, completed daily closes and split-adjusted daily price history are implemented behind a signed-in, owner-bound local profile. Prices are USD; no FX conversion, trading, portfolio construction or prediction model is included in this slice.
+Open **Investments → Stocks**, or http://127.0.0.1:8004/stocks. **Try synthetic example** shows a clearly fictional instrument and price path without account/provider access. Real search, source/timestamp labels, latest eligible IEX trades, completed daily closes and split-adjusted daily price history are implemented behind a signed-in, owner-bound local profile. Prices are USD; no FX conversion, trading or prediction model is included in Stocks. Manual portfolio valuation is available in Portfolios.
 
 [Set up your own Alpaca paper keys locally](docs/alpaca-setup.md). Keys are entered with hidden input in your terminal and kept outside Git/browser code. The free IEX feed covers one exchange, with a 15-second screen refresh during supported regular sessions. Stale/no-trade/closed/error states stay visible. Daily close excludes current-day bars, and chart prices exclude dividend income. Day change is unavailable until its comparable share basis is verified.
 
 **Real-account endpoint access was checked after hours on 2026-10-29:** stock/ETF search, IEX latest trades, daily closes and history worked after personal setup. Open-session freshness/polling and broader provider capability checks remain pending; [verification scope](docs/stocks-verification-2026-10-29.md) distinguishes them from synthetic tests. GitHub Pages remains a static showcase; it does not run this data connection or retain personal market data. See the [M10A contract](docs/stock-portfolio-spec.md#m10a-implementation-details--2026-10-29).
+
+## Manual portfolios
+
+Open **Investments → Portfolios**, or http://127.0.0.1:8004/portfolios. Search resolved stocks/ETFs, enter positive shares, optional **total** cost basis and USD cash. Choose Live IEX or Daily close for the whole portfolio, set the holdings-as-of date to match the captured price basis and confirm your share basis. Python calculates value, weights including cash and available unrealized gains/losses. Missing/invalid prices or an unconfirmed date/basis yield a known subtotal with no complete total or portfolio-wide weights.
+
+Use **Try synthetic example** for the fictional $2,000 reference. Real holdings use your existing owner-bound Alpaca profile. Observations are source/time labeled; a complete aged bundle is a last-observed value. New observations prompt explicit revaluation and never overwrite edited quantities or the displayed valuation.
+
+A valid definition can be saved unpriced to the encrypted account library. Reopen restores holdings without a provider call; refresh when ready. Definition-only JSON omits market prices/totals but contains unencrypted shares/cash/costs. No brokerage position import, orders, tax-lot accounting, automatic split adjustments or historical return is inferred. Budget allocation is a later tool. [Contract](docs/stock-portfolio-spec.md#m10b-implementation-contract--authorized-2026-10-29) · [Verification and limits](docs/portfolio-verification-2026-10-29.md).
 
 ## Accounts and saved plans
 

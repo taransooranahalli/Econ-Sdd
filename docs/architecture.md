@@ -72,3 +72,7 @@ The local CLI and macOS launcher default to 127.0.0.1:8004, matching the working
 ## Proposed external market-data boundary
 
 [Draft stock/portfolio contract](stock-portfolio-spec.md) proposes a replaceable server-side provider adapter, strict HTTPS/endpoint/credential boundaries, common capture generations and pure holdings/allocation math. Existing request guards and encrypted-plan infrastructure are reused; no provider SDK or network behavior is added during specification work.
+
+## M10B manual portfolio boundary
+
+`finance/portfolios.py` owns pure validated PORT-M01 arithmetic with isolated Decimal precision. `market/service.py` receives only public resolved identities for batched IEX observations. `portfolio_service.py` privately binds temporary captures to owner/session, canonical-definition hash and input revision, and reassesses freshness before valuation. Shared price caches never receive quantities/cash/cost. `serialization/portfolios.py` stores/exports definition-only records; existing account dispatch restores them unpriced without network. `portfolio_api.py` uses the existing session/CSRF guards. No SQL schema migration or new dependency is required. [Contract](stock-portfolio-spec.md#m10b-implementation-contract--authorized-2026-10-29).

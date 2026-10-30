@@ -80,3 +80,7 @@ Compatibility repair for pre-0.5.1 records: after checking a supported savings/g
 ## M10A stock observations
 
 [Stocks contract](stock-portfolio-spec.md#m10a-implementation-details--2026-10-29) defines stable provider identity, Decimal-string prices, source/feed/currency, event versus bar timestamps, retrieval age, session calendar, missing-data states and memory-cache limits. Provider profile is a private mode-0600 local file bound to an existing account UUID; no browser/import credentials are accepted. Observations are temporary and are not saved to SQL, exported or displayed publicly. Existing encrypted calculator records and schemas are unchanged. [Setup](alpaca-setup.md).
+
+## Portfolio holdings definitions
+
+Model `portfolio-holdings-v1`, kind `portfolio_holdings`, schema 1. Save resolved identities, decimal-string shares/optional total cost/cash, USD pricing mode, as-of/confirmation and sample provenance. Encrypt names/definitions with the existing account envelope. Reopen/import returns unpriced and ignores derived totals; no provider request on reopen. Prices and results are excluded from JSON exports. Captures are in-memory owner/session/revision/hash-bound observations, never SQL records or exported files. [Authoritative bounds/source rules](stock-portfolio-spec.md#m10b-implementation-contract--authorized-2026-10-29).

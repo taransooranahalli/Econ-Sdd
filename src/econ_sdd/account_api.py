@@ -16,9 +16,11 @@ from .serialization.records import result_record,result_display,legacy_rate_inpu
 
 from .finance.investments import MODEL_VERSION as INVESTMENT_MODEL_VERSION, InvestmentScenario, calculate_investments
 from .serialization.investments import investment_record, investment_display
+from .finance.portfolios import MODEL_VERSION as PORTFOLIO_MODEL_VERSION, PortfolioDefinition
+from .serialization.portfolios import definition_record
 
-MODELS={'savings':SavingsScenario,'goal':SavingsGoal,'cash_flow':CashFlowBudget,'investment_growth':InvestmentScenario}
-VERSIONS={'investment_growth':INVESTMENT_MODEL_VERSION,'savings':MODEL_VERSION,'goal':GOAL_MODEL_VERSION,'cash_flow':CASH_FLOW_MODEL_VERSION}
+MODELS={'portfolio_holdings':PortfolioDefinition,'savings':SavingsScenario,'goal':SavingsGoal,'cash_flow':CashFlowBudget,'investment_growth':InvestmentScenario}
+VERSIONS={'portfolio_holdings':PORTFOLIO_MODEL_VERSION,'investment_growth':INVESTMENT_MODEL_VERSION,'savings':MODEL_VERSION,'goal':GOAL_MODEL_VERSION,'cash_flow':CASH_FLOW_MODEL_VERSION}
 
 
 def fields(data,required):
@@ -38,6 +40,7 @@ def normalize_plan(data,*,updating=False):
 
 
 def calculate_model(kind,model):
+    if kind=='portfolio_holdings':return definition_record(model)
     if kind=='investment_growth':
         result=calculate_investments(model);return {**investment_record(result),'display':investment_display(result)}
     if kind=='cash_flow':

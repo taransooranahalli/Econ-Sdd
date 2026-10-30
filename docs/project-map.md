@@ -9,6 +9,7 @@ Econ-Sdd/
 │   │   ├── savings.py          Decimal savings projection
 │   │   ├── goals.py            Required deposit and calendar rules
 │   │   ├── investments.py      Total return, monthly fees and purchasing power
+│   │   ├── portfolios.py       Manual holdings value, weights and entered-cost gains
 │   │   ├── cash_flow.py        Monthly income minus expenses
 │   │   └── currencies.py       Supported currencies and minor units
 │   ├── serialization/         Versioned JSON/CSV and server display values
@@ -17,6 +18,8 @@ Econ-Sdd/
 │   ├── account_api.py         Account routes and owner-scoped saved plans
 │   ├── market/                Alpaca GET transport, validation, cache and local setup
 │   ├── market_api.py          Session/CSRF guarded Stocks APIs
+│   ├── portfolio_service.py   Private expiring price captures
+│   ├── portfolio_api.py       Definition import/export and guarded valuation
 │   ├── web.py                 App factory, request guards and calculator API
 │   ├── __main__.py            Loopback launcher
 │   └── static/                Studio pages, scripts, styles and local fonts

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="csrf-token" content="__CSRF_TOKEN__">
+<title>Finance</title>
+<link rel="stylesheet" href="/static/styles.css">
+<script src="/static/portfolios.js" defer></script>
+<script src="/static/account.js" defer></script>
+</head>
+<body>
+<div id="econ-savings-usd"><div id="ec-studio" class="ec-stage"><div class="ec-shell">
+<aside class="ec-sidebar">
+  <div class="ec-brand"><span class="ec-brand-letter">F</span>inance<span class="ec-brand-period">.</span></div>
+  <div class="ec-brand-note">Personal finance. Your way.</div>
+  <div class="ec-nav-caption">Your workspace</div>
+  <nav aria-label="Application navigation"><a class="ec-nav-item" href="/">Savings</a><a class="ec-nav-item" href="/cash-flow">Cash flow</a><a class="ec-nav-item ec-active" href="/investments" aria-current="page">Investments</a><a class="ec-nav-item" href="/plans">Saved plans</a></nav>
+  <div class="ec-nav-footer">Personal workspace<br>Runs on your computer</div>
+</aside>
+<div class="ec-workspace">
+<header class="ec-topbar"><div class="ec-mobile-brand">Finance.</div><div class="ec-breadcrumb">Workspace <span>/</span> Calculators <span>/</span> <strong>Portfolios</strong></div><div class="ec-top-actions"><a class="ec-account-link" id="account-link" href="/account">Sign in</a><button id="account-logout" type="button" class="ec-example" hidden>Sign out</button><span class="ec-badge">Local workspace</span><span class="ec-badge" title="Source prices are USD; currency conversion is not supported yet.">USD prices</span></div></header>
+<main class="ec-main">
+<nav class="ec-calculator-nav" aria-label="Mobile calculator navigation"><a href="/">Savings</a><a href="/cash-flow">Cash flow</a><a href="/investments" aria-current="page">Investments</a><a href="/plans">Saved plans</a></nav>
+<p id="account-notice" class="ec-file-note" role="status" hidden></p>
+
+<header class="ec-header"><div><p class="ec-eyebrow">Give every holding its place</p><h1>Your <span class="ec-title-accent">portfolio.</span></h1><p class="ec-subtitle">Add your holdings. See their value, cash and allocation in one place.</p></div><div class="ec-header-actions"><button id="port-example" type="button" class="ec-quiet-button" disabled>Try synthetic example</button><button id="port-open" type="button" class="ec-quiet-button" disabled>Open definition</button><input id="port-file" type="file" accept=".json,application/json" hidden></div></header>
+<nav class="ec-investment-nav" aria-label="Investment tools"><a href="/investments">Growth</a><a href="/stocks">Stocks</a><a href="/portfolios" aria-current="page">Portfolios</a></nav>
+<section class="ec-market-notice" aria-label="Portfolio data connection"><div><span id="port-connection-badge" class="ec-small-tag">Checking setup</span><p id="port-connection-message" role="status">Checking your local account and Alpaca profile…</p></div><a class="ec-quiet-button" href="/stocks#alpaca-setup">Alpaca setup ↗</a></section>
+<div class="ec-layout ec-portfolio-layout"><section class="ec-surface ec-form ec-portfolio-editor" aria-label="Portfolio editor"><div class="ec-section-heading"><h2>Your holdings</h2><span id="port-source" class="ec-small-tag">Manual</span></div>
+<form id="port-search-form" novalidate><label class="ec-field" for="port-query"><span class="ec-label">Find a stock or ETF</span><span class="ec-input-wrap"><input id="port-query" type="search" placeholder="e.g. AAPL or Apple" maxlength="60" autocomplete="off"></span></label><button id="port-search" type="submit" class="ec-quiet-button" disabled>Search Alpaca</button><p id="port-search-message" class="ec-helper" role="status">Select a resolved listing to add it.</p><div id="port-search-results" class="ec-stock-search-results"></div></form>
+<form id="port-form" novalidate><p id="port-empty-holdings" class="ec-helper">No holdings yet. Add a listing above, or keep a cash-only portfolio.</p><div id="port-holdings"></div>
+<label class="ec-field" for="port-cash"><span class="ec-label">Cash · USD</span><span class="ec-input-wrap"><span class="ec-money-symbol">$</span><input id="port-cash" type="number" min="0" max="1000000000000" step="0.01" value="0" inputmode="decimal"></span></label>
+<div class="ec-field"><span class="ec-label" id="port-mode-label">Portfolio price mode</span><div class="ec-segment" role="group" aria-labelledby="port-mode-label"><button type="button" data-port-mode="live" aria-pressed="true">Live IEX</button><button type="button" data-port-mode="daily" aria-pressed="false">Daily close</button></div></div>
+<label class="ec-field" for="port-as-of"><span class="ec-label">Holdings as of</span><span class="ec-input-wrap"><input id="port-as-of" type="date" required></span><span class="ec-helper">Use the date matching the captured price basis (New York sessions).</span></label>
+<label class="ec-portfolio-confirm"><input id="port-confirmed" type="checkbox"><span>My shares and total cost basis reflect splits and other corporate actions for this date.</span></label>
+<p id="port-basis-help" class="ec-helper">Confirm your share basis before valuing securities. Daily close may require the previous completed session date.</p>
+<button id="port-value" type="submit" class="ec-primary" disabled>Value portfolio</button><div class="ec-example-actions"><button id="port-clear" type="button" class="ec-example">Clear portfolio</button></div><p id="port-error" class="ec-error" role="alert" hidden></p><p id="port-validation" class="ec-helper" role="status"></p>
+</form></section>
+<div class="ec-results-column"><section id="port-result" class="ec-surface ec-result" aria-label="Portfolio valuation"><div id="port-empty-result" class="ec-empty"><span class="ec-empty-mark" aria-hidden="true">↗</span><h2>Bring your holdings into view.</h2><p>Enter your shares and cash, then value them using your selected Alpaca price source. Reopened definitions start unpriced.</p><span class="ec-badge">Calculated in Python</span></div>
+<div id="port-result-content" hidden><p id="port-stale" class="ec-pending" role="status" hidden>Inputs changed. This is an older valuation. Revalue to use your current holdings.</p><p id="port-new-prices" class="ec-pending" role="status" hidden>New prices available — choose Revalue to update this captured valuation.</p><p id="port-result-label" class="ec-projection-heading"></p><div class="ec-stock-price-line"><strong id="port-total" class="ec-total"></strong><span class="ec-badge">USD</span></div><p id="port-status" class="ec-result-note" role="status"></p><p id="port-coverage" class="ec-helper"></p>
+<div class="ec-mini-metrics ec-portfolio-metrics"><div><p>Securities value</p><strong id="port-securities"></strong></div><div><p>Cash</p><strong id="port-cash-value"></strong></div><div><p>Unrealized gain / loss</p><strong id="port-gain"></strong></div><div><p>Gain on entered cost</p><strong id="port-gain-percent"></strong></div></div>
+<div class="ec-stock-chart-heading"><h3>Portfolio weights</h3><span class="ec-helper">Includes cash</span></div><div id="port-weights" class="ec-portfolio-weights"></div>
+<h3 class="ec-portfolio-table-heading">Holdings breakdown</h3><div class="ec-table-wrap"><table aria-label="Portfolio holding values"><thead><tr><th scope="col">Holding</th><th scope="col">Shares</th><th scope="col">Price · USD</th><th scope="col">Value · USD</th><th scope="col">Weight</th><th scope="col">Gain / loss</th></tr></thead><tbody id="port-value-rows"></tbody></table></div>
+<details class="ec-metadata"><summary>Prices, timestamps & assumptions</summary><p id="port-times"></p><p id="port-price-basis"></p><div id="port-quote-details"></div><p>Holdings and cost basis are manually entered. This is not verified tax accounting or a historical portfolio return. Values exclude future sale costs, spread/slippage, taxes and dividend income. IEX covers one exchange; observations are not an atomic market snapshot.</p></details>
+</div></section>
+<section class="ec-surface ec-portfolio-save" aria-label="Portfolio definition saving"><div class="ec-section-heading"><h2>Keep your portfolio</h2><span class="ec-small-tag">Definitions only</span></div><label class="ec-field" for="plan-title"><span class="ec-label">Portfolio name</span><span class="ec-input-wrap"><input id="plan-title" type="text" maxlength="80" placeholder="e.g. My long-term holdings"></span></label><div class="ec-export-actions"><button id="account-save" class="ec-quiet-button" type="button" disabled>Save to account</button><button id="account-copy" class="ec-quiet-button" type="button" hidden>Save a copy</button><button id="port-export" class="ec-quiet-button" type="button" disabled>Download definition · JSON</button></div><p id="account-save-status" class="ec-file-note" role="status">Sign in to save and revisit this plan.</p><p class="ec-file-note">Account saves are encrypted. JSON downloads contain unencrypted holdings, cash and costs. Prices and totals are omitted. Reopening never fetches prices automatically.</p></section>
+<section class="ec-assumptions" aria-label="Portfolio assumptions"><h3>Assumptions, in plain sight</h3><div class="ec-assumption-items"><span>Manual holdings</span><span>One USD price source</span><span>Unadjusted valuation prices</span><span>Before trading costs & tax</span></div><p class="ec-helper">Cash is included in weights. Missing prices or an unconfirmed share basis prevent a complete total. Target allocation and prediction modeling are separate future tools.</p></section>
+</div></div><footer class="ec-footer"><span>Personal portfolio workspace · no trades or account sync</span><span>Finance · portfolio-holdings-v1</span></footer>
+</main></div></div></div></div><noscript>Portfolio editing requires JavaScript and the local Python engine.</noscript></body></html>

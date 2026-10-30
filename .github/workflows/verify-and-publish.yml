@@ -38,6 +38,7 @@ jobs:
           node --check src/econ_sdd/static/investments.js
           node --check src/econ_sdd/static/account.js
           node --check src/econ_sdd/static/stocks.js
+          node --check src/econ_sdd/static/portfolios.js
           node --check site/assets/showcase.js
       - name: Build the public asset allowlist
         env:

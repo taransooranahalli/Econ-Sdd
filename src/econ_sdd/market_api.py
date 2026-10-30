@@ -55,3 +55,10 @@ def install_market_routes(app, service, session_for, payload, static, csrf_token
         if error is not None:
             return error
         return await run_in_threadpool(service.detail, session.user_id, data['instrument_id'], data['mode'], data['days'])
+
+    @app.post('/api/market/resolve')
+    async def resolve(request: Request):
+        session=await session_for(request,mutation=True)
+        data,error=await body_for(request,{'instrument_id'})
+        if error is not None:return error
+        return {'instrument':await run_in_threadpool(service.resolve,session.user_id,data['instrument_id'])}

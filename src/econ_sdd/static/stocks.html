@@ -25,7 +25,7 @@
 <p id="account-notice" class="ec-file-note" role="status" hidden></p>
 
 <header class="ec-header"><div><p class="ec-eyebrow">A closer look at the market</p><h1>Explore <span class="ec-title-accent">stocks.</span></h1><p class="ec-subtitle">Find a listing. Inspect its price, source and history.</p></div><div class="ec-header-actions"><button class="ec-quiet-button" id="stock-example" type="button" disabled>Try synthetic example</button></div></header>
-<nav class="ec-investment-nav" aria-label="Investment tools"><a href="/investments">Growth</a><a href="/stocks" aria-current="page">Stocks</a><span class="ec-helper">Portfolios · planned</span></nav>
+<nav class="ec-investment-nav" aria-label="Investment tools"><a href="/investments">Growth</a><a href="/stocks" aria-current="page">Stocks</a><a href="/portfolios">Portfolios</a></nav>
 <section class="ec-market-notice" aria-label="Market data connection"><div><span class="ec-small-tag" id="connection-badge">Checking setup</span><p id="connection-message" role="status">Checking your local market-data configuration…</p></div><a class="ec-quiet-button" href="#alpaca-setup">Setup instructions ↘</a></section>
 <div class="ec-layout ec-stock-layout">
 <section class="ec-surface ec-form ec-stock-discovery" aria-label="Stock discovery"><div class="ec-section-heading"><h2>Find an instrument</h2><span class="ec-small-tag">U.S. equities</span></div>
@@ -34,7 +34,7 @@
 <div class="ec-stock-scope"><h3>Source matters.</h3><p class="ec-helper">Free IEX trades cover one exchange. An older IEX trade does not mean a stock stopped trading elsewhere.</p><p class="ec-helper">All source prices are USD. Currency conversion is not supported yet.</p></div></section>
 <div class="ec-results-column"><section class="ec-surface ec-result ec-stock-detail" aria-label="Stock details" aria-busy="false">
 <div id="stock-empty" class="ec-empty"><span class="ec-empty-mark" aria-hidden="true">↗</span><h2>Start with a stock.</h2><p>Search for a ticker after setup, or try a fictional example to explore this workspace.</p><span class="ec-badge">Read-only market observations</span></div>
-<div id="stock-content" hidden><div class="ec-stock-title-row"><div><p class="ec-eyebrow" id="stock-symbol"></p><h2 id="stock-name"></h2><p class="ec-helper" id="stock-listing"></p></div><button id="stock-refresh" class="ec-quiet-button" type="button">Refresh price</button></div>
+<div id="stock-content" hidden><div class="ec-stock-title-row"><div><p class="ec-eyebrow" id="stock-symbol"></p><h2 id="stock-name"></h2><p class="ec-helper" id="stock-listing"></p></div><a id="stock-portfolio" class="ec-quiet-button" href="/portfolios" hidden>Create portfolio</a><button id="stock-refresh" class="ec-quiet-button" type="button">Refresh price</button></div>
 <div class="ec-segment ec-market-mode" role="group" aria-label="Price source mode"><button type="button" data-price-mode="live" aria-pressed="true">Live IEX</button><button type="button" data-price-mode="daily" aria-pressed="false">Daily close</button></div>
 <p id="stock-feedback" class="ec-pending" role="status" hidden></p><p id="stock-detail-error" class="ec-error" role="alert" hidden></p>
 <p id="stock-price-label" class="ec-projection-heading"></p><div class="ec-stock-price-line"><strong id="stock-price" class="ec-total"></strong><span class="ec-badge">USD</span></div><p id="stock-price-status" class="ec-result-note" role="status"></p>

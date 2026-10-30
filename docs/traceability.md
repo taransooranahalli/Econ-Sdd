@@ -30,7 +30,7 @@ After GitHub’s README initialization, the first application commit is a review
 
 ## Draft future requirements
 
-STK-AC-01/02 and PORT-AC-01..06 are defined in the [stock/portfolio contract](stock-portfolio-spec.md). M10A implements the Stocks slice; portfolios remain future work.
+STK-AC-01/02 and PORT-AC-01..06 are defined in the [stock/portfolio contract](stock-portfolio-spec.md). M10A implements Stocks; M10B implements manual holdings. Budget allocation remains future work.
 
 | Requirement | Implementation | Evidence / limits |
 | --- | --- | --- |
@@ -39,4 +39,11 @@ STK-AC-01/02 and PORT-AC-01..06 are defined in the [stock/portfolio contract](st
 | STK account/CSRF/owner isolation | [Market routes](../src/econ_sdd/market_api.py) | [Owner, request guard and end-to-end fixture API tests](../tests/integration/test_market_api.py) |
 | M10A Studio and setup states | [Stocks page](../src/econ_sdd/static/stocks.html), [rendering](../src/econ_sdd/static/stocks.js) | Desktop/phone, keyboard and synthetic sign-in/search/daily-close browser review; [verification record](stocks-verification-2026-10-29.md) |
 
-PORT-AC-01..06 have specification/example evidence only; no holdings/allocation implementation is claimed.
+PORT-M01 and PORT-AC-01/03/04/05 are implemented for manual holdings; PORT-AC-02 allocation remains future work.
+
+| Requirement | Implementation | Verification |
+| --- | --- | --- |
+| PORT-M01 / PORT-AC-01: values, weights and entered-cost gains | [Pure portfolio engine](../src/econ_sdd/finance/portfolios.py) | [Independent Fraction/110-digit references, bounds, missing/zero/date/source cases](../tests/unit/test_portfolios.py) |
+| PORT-AC-03: unadjusted, confirmed share basis | [Capture service](../src/econ_sdd/portfolio_service.py), [market batch adapter](../src/econ_sdd/market/service.py) | [Capture/date/identity/freshness tests](../tests/unit/test_portfolio_captures.py); user confirmation required, no corporate-action detection claimed |
+| PORT-AC-04: private definitions and captures | [Portfolio APIs](../src/econ_sdd/portfolio_api.py), existing account store, [definition serializer](../src/econ_sdd/serialization/portfolios.py) | [Ownership/CSRF/capture tampering, encrypted save/restart/revision/quota, offline reopen and import/export tests](../tests/integration/test_portfolio_api.py) |
+| PORT-AC-05/06: Studio and regression evidence | [Portfolio editor](../src/econ_sdd/static/portfolios.html), [interaction/rendering](../src/econ_sdd/static/portfolios.js) | [Browser/release verification and limits](portfolio-verification-2026-10-29.md) |

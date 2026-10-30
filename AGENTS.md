@@ -79,3 +79,7 @@ On 2026-10-29 the user authorized specification work for stocks and portfolio cr
 ## Stock implementation authorization — 2026-10-29
 
 The user approved implementing the Stocks slice with Alpaca free live IEX data and the existing Finance/Studio UI. Implement M10A only; holdings/allocation and predictions remain separate. Include local setup instructions because the user has no Alpaca account/keys yet. Real-provider capability verification remains pending until user configuration; synthetic tests/previews are not live verification. Keep the public Pages showcase synthetic and data access local and owner-bound. This authorization supersedes the earlier specification-only restriction for M10A.
+
+## Portfolio holdings implementation authorization — 2026-10-29
+
+The user approved M10B: manually add holdings and value them with Alpaca while preserving the Finance/Studio UI. Implement PORT-M01, encrypted definition saves/offline reopen, truthful partial/aged states and share-basis review. M10C budget allocation, recommendations, prediction models, historical returns, bank links and trading remain separate. Use synthetic holdings and temporary stores for tests; do not inspect or change real saved plans for QA. A user-authorized real-provider smoke test may use clearly fictional quantities without saving to the real account.

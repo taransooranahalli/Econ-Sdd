@@ -56,3 +56,7 @@ User selected Finance as the website title for both the local app and GitHub Pag
 ## M10A Stocks
 
 User approved the Stocks slice on 2026-10-29. Investments now has Growth / Stocks links and a Portfolios planned label. Keep Finance branding and sidebar order. Stocks uses a listing search surface, explicit live-IEX/daily-close buttons, labeled source/time/coverage, price-only chart plus accessible daily-price table, setup state and a separate clearly fictional preview. USD source prices cannot be re-denominated. Portfolio actions remain absent until their implementation. [M10A contract](stock-portfolio-spec.md#m10a-implementation-details--2026-10-29).
+
+## M10B manual portfolios
+
+The user approved the Finance/Studio holdings editor on 2026-10-29. Growth / Stocks / Portfolios are real navigation links. Preserve the input/result surfaces, purple accents, segmented price mode, source/date labels, known-subtotal/partial/aged states, explicit Revalue and encrypted shared library. Stock detail can seed a new draft with a resolved listing. Restore definitions unpriced; show optional entered-cost gains, cash-inclusive weights, quote provenance and private definition download warning. [Browser evidence](portfolio-verification-2026-10-29.md).

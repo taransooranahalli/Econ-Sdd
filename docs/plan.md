@@ -1,6 +1,6 @@
 # Implementation plan
 
-Status: calculators complete on 2026-10-27; accounts and encrypted SQLite saved plans verified on 2026-10-28. Complete-month date handling approved by the user.
+Status: calculators, accounts, Stocks and manual portfolio holdings implemented locally through 0.7.0 on 2026-10-29. Complete-month date handling approved by the user. Current evidence and limits are recorded under each milestone below.
 
 | Milestone | Status | Dependencies | Acceptance checks |
 | --- | --- | --- | --- |
@@ -12,8 +12,9 @@ Status: calculators complete on 2026-10-27; accounts and encrypted SQLite saved 
 | M4: Save/load/export and release review | Complete | M3 | SAV-AC-06 and all remaining criteria; JSON round-trip/version validation, CSV parity, privacy checks, full relevant suite, run instructions, and limitations |
 | M5: Savings goal | Complete | M4; approved complete-month convention | GOAL-AC-01..05; independent inverse values/minimality, dates, compatible files, API and responsive Studio UI |
 | M6: Monthly cash flow | Complete | User selected monthly income and expenses | CF-AC-01..06; exact signed totals, ratios, categories, files and request guards, navigation and responsive UI |
-| M10A: Stocks/API | Specification draft only | [Free live-preferred scope and provider capability gate](stock-portfolio-spec.md) | STK-AC-01/02; no integration claims until real access checked |
-| M10B/C: Holdings and allocation | Specification draft only | Reviewed financial/data contract; M10A | PORT-AC-01..06; independent math, encrypted definitions, Studio UI and later implementation evidence |
+| M10A: Stocks/API | Implemented locally in 0.6.0; representative after-hours endpoints checked | [Provider contract](stock-portfolio-spec.md) | [Verification](stocks-verification-2026-10-29.md); open-session freshness/polling remains unobserved |
+| M10B: Manual holdings | Implemented locally in 0.7.0 | User-authorized contract; M10A | [580-test and browser verification](portfolio-verification-2026-10-29.md); independent math, encrypted definitions, Studio UI, unsaved provider smoke check |
+| M10C: Budget allocation | Specification draft only | Separate reviewed implementation scope; M10B | PORT-M02 and allocation-specific acceptance checks remain later work |
 | M9: Investment growth | Complete locally in 0.5.0 | User requested investments with spec-first workflow; [approved contract](investment-spec.md) | INV-AC-01..06; independent math, fees/inflation, Studio UI, files/encrypted plans, browser and regression verification before push |
 
 ## Current verification
@@ -128,3 +129,7 @@ The user authorized Alpaca free live IEX Stocks with the accepted Finance UI; po
 ## Real Alpaca access follow-up — 2026-10-29
 
 User configured paper keys and authorized verification. Restarted the local app, corrected a long provider-name compatibility bound with fictional regressions, and passed **509 tests**. Real authenticated AAPL/SPY search, IEX latest-trade access, daily-close mode and history worked after hours; open-session freshness/polling and broader licensing/capability checks remain pending. [Evidence and exact limits](stocks-verification-2026-10-29.md#follow-up-real-account-endpoint-smoke-check--2026-10-29-evening-americachicago). No raw responses, credentials or live prices are committed/published.
+
+## M10B manual holdings portfolios — 2026-10-29
+
+User authorized manually adding holdings and Alpaca valuation with the Finance UI. Implemented `portfolio-holdings-v1`, source/date-confirmed Decimal value/weights/gains, partial/aged states, private expiring captures, definition-only JSON, encrypted library save and network-free unpriced reopen in 0.7.0. **580 tests passed** plus syntax/dependency/build and desktop/phone/browser workflow checks. An unsaved real AAPL/SPY smoke check with fictional quantities returned a last-observed value after hours. [Verification, exact coverage and limitations](portfolio-verification-2026-10-29.md). Allocation, automatic corporate-action accounting and predictions remain later.

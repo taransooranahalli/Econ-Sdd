@@ -173,3 +173,69 @@ class MarketService:
             return {'source':'provider','instrument':asset,'quote':quote,'history':history,
                     'change':{'available':False,'reason':'Day change is unavailable until a comparable previous-close share basis is verified.'},
                     'poll_after_seconds':15 if quote['market_open'] else None}
+
+    def resolve(self, owner_id, identity):
+        self.require_owner(owner_id)
+        try:identity=str(UUID(identity))
+        except (ValueError,TypeError,AttributeError):
+            raise MarketError('instrument','Choose a resolved listing.',422) from None
+        with self._lock:
+            asset=next((a for a in self._catalog() if a['id']==identity),None)
+            if asset is None:raise MarketError('instrument','This listing is unsupported or no longer active.',422)
+            return asset
+
+    def portfolio_prices(self, owner_id, identities, mode):
+        """Capture only public identities/prices. Never receive shares, cost or cash."""
+        self.require_owner(owner_id)
+        if mode not in ('live','daily') or not 1<=len(identities)<=20:
+            raise MarketError('portfolio','Use 1–20 resolved instruments and one pricing mode.',422)
+        with self._lock:
+            now=self.clock();catalog={a['id']:a for a in self._catalog()}
+            self._active={k:v for k,v in self._active.items() if (now-v).total_seconds()<90}
+            ids={i.id for i in identities}
+            if len(set(self._active)|ids)>20:
+                raise MarketError('active_limit','At most 20 instruments can refresh across tabs. Close other market views and wait 90 seconds.',429,90)
+            self._active.update({i:now for i in ids})
+            calendar=self._calendar(now);today=now.astimezone(NY).date()
+            eligible=[d for d in calendar if d<today]
+            basis=today if mode=='live' else max(eligible) if eligible else None
+            if basis is None:raise MarketError('calendar','A completed price session is unavailable.',503)
+            quotes={};usable={}
+            for identity in identities:
+                asset=catalog.get(identity.id)
+                if asset is None or asset['symbol']!=identity.symbol or asset['exchange']!=identity.exchange:
+                    quotes[identity.id]={'price':None,'state':'listing_review','label':'Listing changed or unavailable — resolve this holding again.',
+                                         'provider':'Alpaca','feed':'iex','currency':'USD','adjustment':'raw',
+                                         'price_kind':'eligible_trade' if mode=='live' else 'daily_close',
+                                         'session_date':basis.isoformat(),'event_time_utc':None,'fetched_at_utc':None}
+                else:usable[identity.id]=asset
+            if mode=='live' and usable:
+                symbols=sorted(a['symbol'] for a in usable.values())
+                raw,fetched=self._get('trades',{'symbols':','.join(symbols),'feed':'iex','currency':'USD'},10)
+                if (not isinstance(raw,dict) or raw.get('feed','iex')!='iex' or raw.get('currency','USD')!='USD'
+                        or not isinstance(raw.get('trades'),dict) or set(raw['trades'])-set(symbols)):
+                    raise malformed()
+                for identity,asset in usable.items():
+                    try:quotes[identity]=observation(raw['trades'].get(asset['symbol']),fetched,self.clock(),calendar)
+                    except MarketError:
+                        quotes[identity]={'price':None,'state':'invalid_price','label':'Invalid IEX observation — price unavailable.',
+                                          'provider':'Alpaca','feed':'iex','currency':'USD','adjustment':'raw','price_kind':'eligible_trade',
+                                          'session_date':basis.isoformat(),'event_time_utc':None,'fetched_at_utc':iso(fetched)}
+            elif mode=='daily':
+                for identity,asset in usable.items():
+                    try:
+                        history=self._bars(asset,30,'raw',calendar,now)
+                        row=next((p for p in history['points'] if p['session_date']==basis.isoformat()),None)
+                        quotes[identity]={'price':row['close'] if row else None,'state':'daily' if row else 'missing_close',
+                                          'label':'Provider daily close for '+basis.isoformat() if row else 'Required daily close unavailable',
+                                          'provider':'Alpaca','feed':'iex','currency':'USD','adjustment':'raw','price_kind':'daily_close',
+                                          'session_date':basis.isoformat(),'event_time_utc':None,'fetched_at_utc':history['fetched_at_utc']}
+                    except MarketError as exc:
+                        if exc.code!='invalid_data':raise
+                        quotes[identity]={'price':None,'state':'invalid_price','label':'Invalid daily close — price unavailable.',
+                                          'provider':'Alpaca','feed':'iex','currency':'USD','adjustment':'raw','price_kind':'daily_close',
+                                          'session_date':basis.isoformat(),'event_time_utc':None,'fetched_at_utc':None}
+            window=calendar.get(today)
+            return {'source':'provider','basis_date':basis.isoformat(),'quotes':quotes,'captured_at_utc':iso(self.clock()),
+                    'market_open':bool(window and window[0]<=now<window[1]),
+                    'next_open_utc':next((iso(v[0]) for _,v in sorted(calendar.items()) if v[0]>now),None)}

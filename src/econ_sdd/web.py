@@ -16,6 +16,8 @@ from .security import Keyring,VaultError
 from .account_api import install_account_routes
 from .market.service import MarketService
 from .market_api import install_market_routes
+from .portfolio_api import install_portfolio_routes
+from .portfolio_service import PortfolioService
 from .finance.currencies import CURRENCIES, DEFAULT_CURRENCY
 from .finance.cash_flow import CASH_FLOW_MODEL_VERSION, CashFlowBudget, calculate_cash_flow
 from .finance.goals import GOAL_MODEL_VERSION, SavingsGoal, solve_goal
@@ -213,6 +215,8 @@ def create_app(*,account_store: AccountStore|None=None,public_origin: str|None=N
     session_for=install_account_routes(app,account_store,csrf_token,payload,STATIC,secure=bool(public_origin))
     app.state.market_service=market_service or MarketService()
     install_market_routes(app,app.state.market_service,session_for,payload,STATIC,csrf_token)
+    app.state.portfolio_service=PortfolioService(app.state.market_service)
+    install_portfolio_routes(app,app.state.portfolio_service,session_for,payload,STATIC,csrf_token)
     app.mount("/static", StaticFiles(directory=STATIC), name="static")
     return app
 
